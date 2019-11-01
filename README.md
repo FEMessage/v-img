@@ -23,8 +23,9 @@ This component aims to replace native img element and use webp!
 
 ## Features
 
+- Input jpg/png, output webp(svg/gif not be processed)
 - Automatically check whether your browser support webp and use it
-- Support multi-provider parameter configuration
+- Support multi-provider image service 
   - [x] Alibaba
   - [x] Qiniu
 

@@ -21,6 +21,7 @@
 
 ## Features
 
+- 输入 jpg/png，输出 webp（svg/gif 原样返回，不做转换处理）
 - 根据浏览器环境自动选择是否使用 webp
 - 支持多提供商参数配置
   - [x] 阿里云
@@ -62,6 +63,11 @@ images/
 生成 webp 副本的方法可查看[此文](https://www.yuque.com/docs/share/3eaa556c-0780-4018-8ac1-4e217fb0efdb)。
 
 当`provider=none` 时，仅启用图片懒加载功能
+
+总结一下就是：
+1. 当 `provider=alibaba或qiniu` 时，酌情转webp，默认对图片瘦身
+2. 当 `provider=self` 时，酌情转webp，方式是按规则拼接src，期望用户准备好webp文件
+3. 当 `provider=none` 时，不对src做处理
 
 ### width/height
 
