@@ -1,7 +1,6 @@
 <template>
   <img
     class="v-img lazyload"
-    :style="style"
     :height="height"
     :width="width"
     :data-src="imageSrc"
@@ -77,17 +76,6 @@ export default {
     }
   },
   computed: {
-    style() {
-      switch (this.status) {
-        case STATUS_IDLE:
-        case STATUS_ERROR:
-          return {
-            backgroundColor: 'rgba(0, 0, 0, 0.2)'
-          }
-        default:
-          return {}
-      }
-    },
     imageSrc() {
       return providerConfig[this.provider].getSrc(this)
     }
