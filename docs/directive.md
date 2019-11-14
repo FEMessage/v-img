@@ -9,14 +9,14 @@ use `v-img` directive, can let background-image to use webp。
 
 ```vue
 <template>
-  <div v-img="{src}" style="width:200px;height:200px" />
+  <div v-img="{src}" style="width:100px;height:100px;background-repeat:no-repeat;" />
 </template>
 
 <script>
 export default {
   data() {
     return {
-      src: 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
+      src: 'https://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
     }
   }
 }
