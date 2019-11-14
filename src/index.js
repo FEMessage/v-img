@@ -1,5 +1,6 @@
 // Import vue component
 import Component from './v-img.vue'
+import background from './background'
 
 // `Vue.use` automatically prevents you from using
 // the same plugin more than once,
@@ -7,6 +8,11 @@ import Component from './v-img.vue'
 // will install the plugin only once
 Component.install = Vue => {
   Vue.component(Component.name, Component)
+
+  Vue.directive('img', {
+    inserted: background.init,
+    update: background.update
+  })
 }
 
 // To auto-install when vue is found
