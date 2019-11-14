@@ -1,38 +1,30 @@
 import 'lazysizes/plugins/bgset/ls.bgset'
 import providerConf from './provider-config'
 
-const isBg = arg => arg === 'background'
-
-function getSrc(el, config) {
+function getSrc(config) {
   const isSupportWebp =
     JSON.parse(localStorage.getItem('isSupportWebp')) || false
-  const {provider = 'alibaba', extraQuery} = config
-  const src = providerConf[provider].getSrc({
-    src: el.getAttribute('src'),
+  const {provider = 'alibaba', extraQuery, src} = config
+  if (!src) {
+    return
+  }
+
+  return providerConf[provider].getSrc({
+    src,
     isSupportWebp,
     extraQuery
   })
-
-  return src
 }
 
 export default {
-  init(el, {arg, value = {}}) {
-    if (!isBg(arg)) {
-      return
-    }
-
-    const src = getSrc(el, value)
+  init(el, {value = {}}) {
+    const src = getSrc(value)
     el.classList.add('lazyload')
     el.setAttribute('data-bgset', src)
   },
 
-  update(el, {arg, value = {}}) {
-    if (!isBg(arg)) {
-      return
-    }
-
-    const src = getSrc(el, value)
+  update(el, {value = {}}) {
+    const src = getSrc(value)
     el.style.backgroundImage = `url(${src})`
   }
 }
