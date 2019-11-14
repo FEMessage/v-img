@@ -17,7 +17,7 @@ This example shows using alibaba image service to process images.
 export default {
   data() {
     return {
-      src: 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg'
+      src: 'https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg'
     }
   }
 }

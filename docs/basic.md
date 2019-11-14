@@ -25,8 +25,8 @@ export default {
       height: '500px',
       i: 0,
       srcs: [
-        'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png',
-        'http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg',
+        'https://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png',
+        'https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg',
       ]
     }
   }
