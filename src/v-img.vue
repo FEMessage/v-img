@@ -52,6 +52,7 @@ export default {
     height: {
       type: [String, Number]
     },
+    /** 是否需要 loading 效果 */
     hasLoading: {
       type: Boolean,
       default: true
