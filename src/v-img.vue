@@ -88,7 +88,7 @@ export default {
         case STATUS_IDLE:
         case STATUS_ERROR:
           return {
-            backgroundColor: this.hasLoading
+            backgroundColor: !this.hasLoading
               ? 'transparent'
               : 'rgba(0, 0, 0, 0.2)',
             backgroundSize: '60px'
