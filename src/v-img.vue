@@ -5,7 +5,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc"
-    src="./spinner.svg"
+    :src="hasLoading ? `${require('./spinner.svg')}` : transparentImg"
     v-bind="$attrs"
     v-on="$listeners"
     @load="onLoad"
@@ -52,6 +52,11 @@ export default {
     height: {
       type: [String, Number]
     },
+    /** 是否需要 loading 效果 */
+    hasLoading: {
+      type: Boolean,
+      default: true
+    },
     /** 服务提供商 */
     provider: {
       default: 'alibaba',
@@ -73,7 +78,9 @@ export default {
   data() {
     return {
       isSupportWebp: null,
-      status: STATUS_IDLE
+      status: STATUS_IDLE,
+      transparentImg:
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
     }
   },
   computed: {
@@ -82,7 +89,9 @@ export default {
         case STATUS_IDLE:
         case STATUS_ERROR:
           return {
-            backgroundColor: 'rgba(0, 0, 0, 0.2)'
+            backgroundColor: this.hasLoading
+              ? 'rgba(0, 0, 0, 0.1)'
+              : 'transparent'
           }
         default:
           return {}
