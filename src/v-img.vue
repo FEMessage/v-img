@@ -5,7 +5,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc"
-    :src="!hasLoading ? transparentImg : `${require('./spinner.svg')}`"
+    :src="hasLoading ? `${require('./spinner.svg')}` : transparentImg"
     v-bind="$attrs"
     v-on="$listeners"
     @load="onLoad"
@@ -88,10 +88,9 @@ export default {
         case STATUS_IDLE:
         case STATUS_ERROR:
           return {
-            backgroundColor: !this.hasLoading
-              ? 'transparent'
-              : 'rgba(0, 0, 0, 0.2)',
-            backgroundSize: '60px'
+            backgroundColor: this.hasLoading
+              ? 'rgba(0, 0, 0, 0.1)'
+              : 'transparent'
           }
         default:
           return {}
