@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/FEMessage/v-img/compare/v1.2.0...v1.3.0) (2019-11-27)
+
+
+### Features
+
+* resolve potential 403 problem ([64fb878](https://github.com/FEMessage/v-img/commit/64fb878))
+* 允许不使用 loading 状态 ([#5](https://github.com/FEMessage/v-img/issues/5)) ([1337c4b](https://github.com/FEMessage/v-img/commit/1337c4b))
+
+
+
 ## [1.2.0](https://github.com/FEMessage/v-img/compare/v1.1.0...v1.2.0) (2019-11-18)
 
 
