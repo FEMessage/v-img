@@ -11,6 +11,7 @@
     @load="onLoad"
     @error="onError"
     @click="onClick"
+    referrerpolicy="no-referrer"
   />
 </template>
 
