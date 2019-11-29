@@ -50,6 +50,8 @@ yarn add @femessage/v-img
 - self
 - none
 
+---
+
 - 默认值为 alibaba。这意味着，只需要上传 jpg/png 到阿里云 OSS，使用 v-img 来显示图片，则会使用阿里云的图片处理服务，根据情况自动返回 webp。如果项目中已使用阿里云 OSS 进行图片存储，则可省略设置`provider`
 
 - 当 `provider=self` 时，也即图片放到自有主机，一般出现在项目私有化部署的情况，此时需为每一份图片自行准备相应的 webp 文件。 例如:

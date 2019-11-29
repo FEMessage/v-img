@@ -54,6 +54,8 @@ The component use `provider` to choose image processing strategy, here are avail
 - self
 - none
 
+---
+
 - Alibaba OSS services are used by default, so if you host images on Alibaba OSS, `provider` can be omitted, this means jpg/png on Alibaba OSS, you can get webp when using v-img
 
 - When `provider=self`, means you host images on your server(like Nginx), this needs you need to prepare a webp file for each image, for example:
