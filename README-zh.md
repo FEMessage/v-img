@@ -67,8 +67,8 @@ images/
 - 当`provider=none` 时，仅启用图片懒加载功能
 
 总结一下就是：
-1. 当 `provider=alibaba或qiniu` 时，酌情使用云服务商图片处理功能，自动转 webp，默认对图片瘦身
-2. 当 `provider=self` 时，酌情转 webp，方式是按规则拼接src，期望用户准备好 webp 文件
+1. 当 `provider=alibaba或qiniu` 时，使用云服务商图片处理功能，自动转 webp，默认对图片瘦身
+2. 当 `provider=self` 时，期望用户准备好 webp 文件，判断浏览器环境支持 webp 时，请求 webp 图片
 3. 当 `provider=none` 时，不对 src 做处理
 
 ### width/height
