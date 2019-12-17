@@ -25,7 +25,7 @@ This component aims to replace native img element and use webp!
 
 - Input jpg/png, output webp(svg/gif not be processed)
 - Automatically check whether your browser support webp and use it
-- Support multi-provider image service 
+- Support cloud image service 
   - [x] Alibaba
   - [x] Qiniu
 
@@ -54,9 +54,11 @@ The component use `provider` to choose image processing strategy, here are avail
 - self
 - none
 
-Alibaba OSS services are used by default, so if you host images on Alibaba OSS, `provider` can be omitted
+---
 
-When `provider=self`, means you host images on your server(like Nginx), this needs you need to prepare a webp file for each image, for example:
+- Alibaba OSS services are used by default, so if you host images on Alibaba OSS, `provider` can be omitted, this means jpg/png on Alibaba OSS, you can get webp when using v-img
+
+- When `provider=self`, means you host images on your server(like Nginx), this needs you need to prepare a webp file for each image, for example:
 
 ```sh
 images/
@@ -66,7 +68,7 @@ images/
 
 look at this [article](https://www.yuque.com/docs/share/3eaa556c-0780-4018-8ac1-4e217fb0efdb?translate=en) to see how to use node.js to generate webp from jpg/png
 
-When `provider=none`, it only enable lazyload images function
+- When `provider=none`, it only enable lazyload images function
 
 ### width/height
 
@@ -80,7 +82,8 @@ The `lazyload` function is supported by [lazysizes](https://github.com/aFarkas/l
 
 ## Links
 
-- [docs](https://FEMessage.github.io/v-img/)
+- [api](https://FEMessage.github.io/v-img/)
+- [design doc](https://www.yuque.com/docs/share/6edaadbb-9260-4b49-90d7-0a8d8d03b1de?translate=en)
 - [webp](https://developers.google.com/speed/webp)
 - [alibaba oss guide](https://www.alibabacloud.com/help/doc-detail/47505.html?spm=a2c5t.11065259.1996646101.searchclickresult.2c802d29Uot0hD)
 - [qiniu images processing doc](https://developer.qiniu.com/dora/api/1270/the-advanced-treatment-of-images-imagemogr2)

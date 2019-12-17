@@ -23,7 +23,7 @@
 
 - 输入 jpg/png，输出 webp（svg/gif 原样返回，不做转换处理）
 - 根据浏览器环境自动选择是否使用 webp
-- 支持多提供商参数配置
+- 支持云服务
   - [x] 阿里云
   - [x] 七牛
 
@@ -50,9 +50,11 @@ yarn add @femessage/v-img
 - self
 - none
 
-默认值为 alibaba, 如果项目中使用阿里云 OSS 进行图片存储，则可省略设置`provider`
+---
 
-当 `provider=self` 时，也即图片放到自有主机，一般出现在项目私有化部署的情况，此时需为每一份图片自行准备相应的 webp 文件。 例如:
+- 默认值为 alibaba。这意味着，只需要上传 jpg/png 到阿里云 OSS，使用 v-img 来显示图片，则会使用阿里云的图片处理服务，根据情况自动返回 webp。如果项目中已使用阿里云 OSS 进行图片存储，则可省略设置`provider`
+
+- 当 `provider=self` 时，也即图片放到自有主机，一般出现在项目私有化部署的情况，此时需为每一份图片自行准备相应的 webp 文件。 例如:
 
 ```sh
 images/
@@ -62,12 +64,12 @@ images/
 
 生成 webp 副本的方法可查看[此文](https://www.yuque.com/docs/share/3eaa556c-0780-4018-8ac1-4e217fb0efdb)。
 
-当`provider=none` 时，仅启用图片懒加载功能
+- 当`provider=none` 时，仅启用图片懒加载功能
 
 总结一下就是：
-1. 当 `provider=alibaba或qiniu` 时，酌情转webp，默认对图片瘦身
-2. 当 `provider=self` 时，酌情转webp，方式是按规则拼接src，期望用户准备好webp文件
-3. 当 `provider=none` 时，不对src做处理
+1. 当 `provider=alibaba或qiniu` 时，使用云服务商图片处理功能，自动转 webp，默认对图片瘦身
+2. 当 `provider=self` 时，期望用户准备好 webp 文件，判断浏览器环境支持 webp 时，请求 webp 图片
+3. 当 `provider=none` 时，不对 src 做处理
 
 ### width/height
 
@@ -81,7 +83,8 @@ images/
 
 ## Links
 
-- [docs](https://FEMessage.github.io/v-img/)
+- [api](https://FEMessage.github.io/v-img/)
+- [设计文档](https://www.yuque.com/docs/share/6edaadbb-9260-4b49-90d7-0a8d8d03b1de)
 - [webp](https://developers.google.com/speed/webp)
 - [alibaba oss guide](https://www.alibabacloud.com/help/doc-detail/47505.html?spm=a2c5t.11065259.1996646101.searchclickresult.2c802d29Uot0hD)
 - [qiniu images processing doc](https://developer.qiniu.com/dora/api/1270/the-advanced-treatment-of-images-imagemogr2)
