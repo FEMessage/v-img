@@ -670,6 +670,31 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@femessage/github-release-notes@^0.18.0":
+  version "0.18.0"
+  resolved "https://registry.npmjs.org/@femessage/github-release-notes/-/github-release-notes-0.18.0.tgz#a2b7de635b1b224fd78debb654a705b0859ea919"
+  integrity sha512-1BS7Hxk2DyVZ+Rh8SPUO5ICn25g0PrpKA7A8NRKM+2hY2h3jUEPIE0bD0jzg0ahuY2XjUV9upyoR0P3MWz8+aA==
+  dependencies:
+    babel-runtime "^6.26.0"
+    base-64 "^0.1.0"
+    chalk "^2.1.0"
+    commander "^2.11.0"
+    connectivity "^1.0.0"
+    github-api "^3.0.0"
+    inquirer "^3.3.0"
+    install "^0.10.1"
+    js-beautify "^1.7.4"
+    json2yaml "^1.1.0"
+    minimist "^1.2.0"
+    node-fetch "^1.7.3"
+    npm "^6.4.1"
+    object-assign-deep "^0.3.1"
+    ora "^1.3.0"
+    regex-match-all "^1.0.2"
+    require-from-url "^3.1.3"
+    require-yaml "0.0.1"
+    valid-url "^1.0.9"
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.npm.taobao.org/@jest/console/download/@jest/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
@@ -4424,30 +4449,6 @@ github-api@^3.0.0:
     debug "^2.2.0"
     js-base64 "^2.1.9"
     utf8 "^2.1.1"
-
-github-release-notes@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.npm.taobao.org/github-release-notes/download/github-release-notes-0.17.0.tgz#4dca4dbe19b111c1cec9d8c6e9b2e965f933e6da"
-  integrity sha1-TcpNvhmxEcHOydjG6bLpZfkz5to=
-  dependencies:
-    babel-runtime "^6.26.0"
-    base-64 "^0.1.0"
-    chalk "^2.1.0"
-    commander "^2.11.0"
-    connectivity "^1.0.0"
-    github-api "^3.0.0"
-    inquirer "^3.3.0"
-    install "^0.10.1"
-    js-beautify "^1.7.4"
-    json2yaml "^1.1.0"
-    minimist "^1.2.0"
-    node-fetch "^1.7.3"
-    npm "^6.4.1"
-    object-assign-deep "^0.3.1"
-    ora "^1.3.0"
-    regex-match-all "^1.0.2"
-    require-yaml "0.0.1"
-    valid-url "^1.0.9"
 
 github-slugger@^1.2.0, github-slugger@^1.2.1:
   version "1.2.1"
@@ -9603,6 +9604,11 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npm.taobao.org/require-directory/download/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
+
+require-from-url@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.npmjs.org/require-from-url/-/require-from-url-3.1.3.tgz#e732912b557163229e47ed4c4db0a9631d7196d5"
+  integrity sha512-SWYVQr6rZMumhsE0MGL3caGtBNDBPQRm7JV4fsxb8Nc+LR42QkmLPP56P+Y9jncZLNrrk4SpE/Ozaf8Jo3ialA==
 
 require-main-filename@^1.0.1:
   version "1.0.1"
