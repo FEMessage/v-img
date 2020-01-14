@@ -67,6 +67,7 @@ images/
 - 当`provider=none` 时，仅启用图片懒加载功能
 
 总结一下就是：
+
 1. 当 `provider=alibaba或qiniu` 时，使用云服务商图片处理功能，自动转 webp，默认对图片瘦身
 2. 当 `provider=self` 时，期望用户准备好 webp 文件，判断浏览器环境支持 webp 时，请求 webp 图片
 3. 当 `provider=none` 时，不对 src 做处理
@@ -88,6 +89,8 @@ images/
 - [webp](https://developers.google.com/speed/webp)
 - [alibaba oss guide](https://www.alibabacloud.com/help/doc-detail/47505.html?spm=a2c5t.11065259.1996646101.searchclickresult.2c802d29Uot0hD)
 - [qiniu images processing doc](https://developer.qiniu.com/dora/api/1270/the-advanced-treatment-of-images-imagemogr2)
+- [如何居中缩放 svg 图片](https://stackoverflow.com/a/11671373)
+- [svg 缩放属性详解](https://css-tricks.com/scale-svg/)
 
 [⬆ Back to Top](#table-of-contents)
 
