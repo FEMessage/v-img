@@ -97,7 +97,7 @@ export default {
            * 图片较大时，loading 的圈圈则固定大小
            */
           return {
-            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            backgroundColor: '#eeedeb',
             objectFit: 'scale-down'
           }
         default:
