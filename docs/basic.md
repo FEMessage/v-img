@@ -10,12 +10,12 @@ these features are out of box:
 
 ```vue
 <template>
-	<div>
-	  <p>👇往下滑动，显示图片</p>
-	  <div v-for="_ in 2" class="padding" :style="{height}">height: {{height}}</div>
+  <div>
+    <p>👇往下滑动，显示图片</p>
+    <div v-for="_ in 2" class="padding" :style="{height}">height: {{height}}</div>
     <button @click="i = +!i">点击切换src</button>
-		<v-img :src="srcs[i]" width="100"/>
-	</div>
+    <v-img :src="srcs[i]" width="100"/>
+  </div>
 </template>
 
 <script>

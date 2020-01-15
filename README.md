@@ -25,7 +25,7 @@ This component aims to replace native img element and use webp!
 
 - Input jpg/png, output webp(svg/gif not be processed)
 - Automatically check whether your browser support webp and use it
-- Support cloud image service 
+- Support cloud image service
   - [x] Alibaba
   - [x] Qiniu
 
@@ -87,6 +87,8 @@ The `lazyload` function is supported by [lazysizes](https://github.com/aFarkas/l
 - [webp](https://developers.google.com/speed/webp)
 - [alibaba oss guide](https://www.alibabacloud.com/help/doc-detail/47505.html?spm=a2c5t.11065259.1996646101.searchclickresult.2c802d29Uot0hD)
 - [qiniu images processing doc](https://developer.qiniu.com/dora/api/1270/the-advanced-treatment-of-images-imagemogr2)
+- [how to scale svg from center](https://stackoverflow.com/a/11671373)
+- [more about scaling svg](https://css-tricks.com/scale-svg/)
 
 [⬆ Back to Top](#table-of-contents)
 
