@@ -7,11 +7,11 @@
     :data-src="imageSrc"
     :src="hasLoading ? `${require('./spinner.svg')}` : transparentImg"
     v-bind="$attrs"
+    referrerpolicy="no-referrer"
     v-on="$listeners"
     @load="onLoad"
     @error="onError"
     @click="onClick"
-    referrerpolicy="no-referrer"
   />
 </template>
 
@@ -47,11 +47,13 @@ export default {
     },
     /** 图片宽度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     width: {
-      type: [String, Number]
+      type: [String, Number],
+      default: 'auto'
     },
     /** 图片高度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     height: {
-      type: [String, Number]
+      type: [String, Number],
+      default: 'auto'
     },
     /** 是否需要 loading 效果 */
     hasLoading: {
@@ -89,10 +91,14 @@ export default {
       switch (this.status) {
         case STATUS_IDLE:
         case STATUS_ERROR:
+          if (!this.hasLoading) return {}
+          /**
+           * 图片较小时，loading 图片按比例缩放展示；
+           * 图片较大时，loading 的圈圈则固定大小
+           */
           return {
-            backgroundColor: this.hasLoading
-              ? 'rgba(0, 0, 0, 0.1)'
-              : 'transparent'
+            backgroundColor: '#eeedeb',
+            objectFit: 'scale-down'
           }
         default:
           return {}
@@ -103,11 +109,6 @@ export default {
     }
   },
 
-  beforeMount() {
-    this.checkLayout()
-    this.checkSupportWebp()
-  },
-
   watch: {
     src() {
       /**
@@ -116,6 +117,11 @@ export default {
        */
       if (!this.$el.classList.contains('lazyload')) this.forceUpdateSrc()
     }
+  },
+
+  beforeMount() {
+    this.checkLayout()
+    this.checkSupportWebp()
   },
 
   methods: {
