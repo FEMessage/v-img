@@ -7,70 +7,112 @@ function is(types, src) {
 }
 
 const process = {
-  GET_SRC: 'getSrc',
-  CROP_IMAGE: 'autocrop',
+  CONVERT_WEBP: 'convertWebp',
+  CROP_IMAGE: 'cropImage',
   APPEND_QUERY: 'appendQuery'
+}
+
+const pipe = function(fns) {
+  return function(item) {
+    return fns.reduce(function(prev, fn) {
+      if (typeof fn !== 'function') {
+        fn = v => v
+      }
+      return fn(prev)
+    }, item)
+  }
 }
 
 export const providerConfig = {
   alibaba: {
-    [process.GET_SRC]({src, isSupportWebp, extraQuery}) {
-      let query = ''
+    [process.CONVERT_WEBP](vm) {
+      const {src, isSupportWebp} = vm
+      let query = vm.$src || ''
       if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
       /**
        * 质量变换仅对jpg、webp有效。（png已被转为webp）
        * @see https://help.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
        */
       if (is([png, jpg, webp], src)) query += '/quality,Q_75'
+
+      vm.$src = query
+      return vm
+    },
+
+    // [process.CROP_IMAGE](vm) {
+    //   const dpr = (window && window.devicePixelRatio) || 2
+    //   const actions = ['/resize']
+    // },
+
+    [process.APPEND_QUERY](vm) {
+      const {src, extraQuery} = vm
+      let query = vm.$src || ''
       if (extraQuery) query += '/' + extraQuery
       if (query) {
-        src +=
-          (src.indexOf('?') > -1 ? '&' : '?') + 'x-oss-process=image' + query
+        query =
+          src +
+          (src.indexOf('?') > -1 ? '&' : '?') +
+          'x-oss-process=image' +
+          query
       }
-      return src
+
+      vm.$src = query || src
+      return vm
     }
   },
   qiniu: {
-    [process.GET_SRC]({src, isSupportWebp, extraQuery}) {
+    [process.CONVERT_WEBP](vm) {
+      const {src, isSupportWebp} = vm
+      let query = vm.$src || ''
       // imageMogr2 接口可支持处理的原图片格式有 psd、jpeg、png、gif、webp、tiff、bmp
-      if (is(svg, src)) return src
-      src += src.indexOf('?') > -1 ? '&' : '?'
-      src += 'imageMogr2'
-      if (isSupportWebp && is([png, jpg], src)) src += '/format/webp'
-      src += '/quality/75'
-      if (extraQuery) src += '/' + extraQuery
-      return src
+      if (is(svg, src)) {
+        return vm
+      }
+      if (isSupportWebp && is([png, jpg], src)) query += '/format/webp'
+      query += '/quality/75'
+
+      vm.$src = query
+      return vm
+    },
+
+    [process.APPEND_QUERY](vm) {
+      const {src, extraQuery} = vm
+      let query = vm.$src || ''
+      if (extraQuery) query += '/' + extraQuery
+      if (query) {
+        query = src + (src.indexOf('?') > -1 ? '&' : '?') + 'imageMogr2' + query
+      }
+
+      vm.$src = query || src
+      return vm
     }
   },
   self: {
-    [process.GET_SRC]({src, isSupportWebp}) {
+    [process.CONVERT_WEBP](vm) {
+      const {src, isSupportWebp} = vm
       if (isSupportWebp && is([png, jpg], src)) {
-        src = src.indexOf('?') > -1 ? src.replace('?', '.webp?') : src + '.webp'
+        vm.$src =
+          src.indexOf('?') > -1 ? src.replace('?', '.webp?') : src + '.webp'
+      } else {
+        vm.$src = src
       }
-      return src
+      return vm
     }
   },
   none: {
-    [process.GET_SRC]({src}) {
-      return src
+    [process.CONVERT_WEBP](vm) {
+      vm.$src = vm.src
+      return vm
     }
   }
 }
 
 export default vm => {
-  let imageSrc = vm.src
   const providerPipe = providerConfig[vm.provider]
-  // convert webp
-  if (providerPipe[process.GET_SRC]) {
-    imageSrc = providerPipe[process.GET_SRC](vm)
-  }
-  // append crop query
-  if (vm.autocrop && providerPipe[process.CROP_IMAGE]) {
-    imageSrc = providerPipe[process.CROP_IMAGE](vm)
-  }
-  // append extra query
-  if (vm.extraQuery && providerPipe[process.APPEND_QUERY]) {
-    imageSrc = providerPipe[process.APPEND_QUERY](vm)
-  }
-  return imageSrc
+  const output = pipe([
+    providerPipe[process.CONVERT_WEBP],
+    providerPipe[process.CROP_IMAGE],
+    providerPipe[process.APPEND_QUERY]
+  ])(vm)
+  return output.$src
 }

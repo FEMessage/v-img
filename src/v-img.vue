@@ -16,8 +16,9 @@
 </template>
 
 <script>
-import getSrc, {providerConfig} from './provider-config'
+import {providerConfig, default as getSrc} from './provider-config'
 import reload from './reload.svg'
+
 /**
  * TODO:
  * [ ] 可以考虑在check完isSupportWebp后再动态引入lazySizes

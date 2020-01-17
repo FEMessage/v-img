@@ -1,5 +1,5 @@
 import 'lazysizes/plugins/bgset/ls.bgset'
-import providerConf from './provider-config'
+import getImageSrc from './provider-config'
 
 function getSrc(config) {
   const isSupportWebp =
@@ -9,7 +9,8 @@ function getSrc(config) {
     return
   }
 
-  return providerConf[provider].getSrc({
+  return getImageSrc({
+    provider,
     src,
     isSupportWebp,
     extraQuery
