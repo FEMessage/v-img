@@ -5,7 +5,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc"
-    :src="hasLoading ? `${require('./spinner.svg')}` : transparentImg"
+    :src="hasLoading ? loadingImage : transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"
     v-on="$listeners"
@@ -17,7 +17,7 @@
 
 <script>
 import providerConfig from './provider-config'
-import reload from './reload.svg'
+
 /**
  * TODO:
  * [ ] 可以考虑在check完isSupportWebp后再动态引入lazySizes
@@ -38,6 +38,8 @@ const STATUS_ERROR = 3
 
 export default {
   name: 'VImg',
+
+  pluginOptions: {},
 
   props: {
     /** 图片地址 */
@@ -75,6 +77,16 @@ export default {
     extraQuery: {
       type: String,
       default: ''
+    },
+
+    placeholder: {
+      type: String,
+      default: ''
+    },
+
+    error: {
+      type: String,
+      default: ''
     }
   },
 
@@ -106,6 +118,12 @@ export default {
     },
     imageSrc() {
       return providerConfig[this.provider].getSrc(this)
+    },
+    loadingImage() {
+      return this.placeholder || this.$vimg.placeholder
+    },
+    reloadImage() {
+      return this.error || this.$vimg.error
     }
   },
 
@@ -155,7 +173,7 @@ export default {
     },
     onError() {
       this.status = STATUS_ERROR
-      this.$el.setAttribute('src', reload)
+      this.$el.setAttribute('src', this.reloadImage)
     },
     onClick() {
       if (this.status === STATUS_ERROR) this.forceUpdateSrc()

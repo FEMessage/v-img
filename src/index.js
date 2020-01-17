@@ -1,12 +1,21 @@
 // Import vue component
 import Component from './v-img.vue'
 import background from './background'
+import placeholder from './spinner.svg'
+import error from './reload.svg'
+
+const defaultOptions = {
+  placeholder,
+  error
+}
 
 // `Vue.use` automatically prevents you from using
 // the same plugin more than once,
 // so calling it multiple times on the same plugin
 // will install the plugin only once
-Component.install = Vue => {
+Component.install = (Vue, options = {}) => {
+  Vue.prototype.$vimg = {...defaultOptions, ...options}
+
   Vue.component(Component.name, Component)
 
   Vue.directive('img', {
