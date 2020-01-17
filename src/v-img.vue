@@ -5,7 +5,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc"
-    :src="hasLoading ? loadingImage : transparentImg"
+    :src="transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"
     v-on="$listeners"
@@ -104,8 +104,19 @@ export default {
   },
   computed: {
     style() {
+      const baseStyle = {
+        backgroundSize: 'auto 22px',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#f0f2f5'
+      }
       switch (this.status) {
         case STATUS_IDLE:
+          if (!this.hasLoading) return {}
+          return {
+            ...baseStyle,
+            backgroundImage: `url(${this.loadingImage})`
+          }
         case STATUS_ERROR:
           if (!this.hasLoading) return {}
           /**
@@ -113,8 +124,9 @@ export default {
            * 图片较大时，loading 的圈圈则固定大小
            */
           return {
-            backgroundColor: '#F0F2F5',
-            objectFit: 'scale-down',
+            ...baseStyle,
+            backgroundImage: `url(${this.reloadImage})`,
+            backgroundSize: 'auto 40px',
             cursor: 'pointer'
           }
         default:
@@ -178,7 +190,7 @@ export default {
     },
     onError() {
       this.status = STATUS_ERROR
-      this.$el.setAttribute('src', this.reloadImage)
+      this.$el.setAttribute('src', this.transparentImg)
     },
     onClick() {
       if (this.status === STATUS_ERROR) this.forceUpdateSrc()
