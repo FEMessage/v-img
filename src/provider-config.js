@@ -6,9 +6,15 @@ function is(types, src) {
   return Array.isArray(types) ? types.some(t => t.test(src)) : types.test(src)
 }
 
-export default {
+const process = {
+  GET_SRC: 'getSrc',
+  CROP_IMAGE: 'autocrop',
+  APPEND_QUERY: 'appendQuery'
+}
+
+export const providerConfig = {
   alibaba: {
-    getSrc({src, isSupportWebp, extraQuery}) {
+    [process.GET_SRC]({src, isSupportWebp, extraQuery}) {
       let query = ''
       if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
       /**
@@ -25,7 +31,7 @@ export default {
     }
   },
   qiniu: {
-    getSrc({src, isSupportWebp, extraQuery}) {
+    [process.GET_SRC]({src, isSupportWebp, extraQuery}) {
       // imageMogr2 接口可支持处理的原图片格式有 psd、jpeg、png、gif、webp、tiff、bmp
       if (is(svg, src)) return src
       src += src.indexOf('?') > -1 ? '&' : '?'
@@ -37,7 +43,7 @@ export default {
     }
   },
   self: {
-    getSrc({src, isSupportWebp}) {
+    [process.GET_SRC]({src, isSupportWebp}) {
       if (isSupportWebp && is([png, jpg], src)) {
         src = src.indexOf('?') > -1 ? src.replace('?', '.webp?') : src + '.webp'
       }
@@ -45,8 +51,26 @@ export default {
     }
   },
   none: {
-    getSrc({src}) {
+    [process.GET_SRC]({src}) {
       return src
     }
   }
+}
+
+export default vm => {
+  let imageSrc = vm.src
+  const providerPipe = providerConfig[vm.provider]
+  // convert webp
+  if (providerPipe[process.GET_SRC]) {
+    imageSrc = providerPipe[process.GET_SRC](vm)
+  }
+  // append crop query
+  if (vm.autocrop && providerPipe[process.CROP_IMAGE]) {
+    imageSrc = providerPipe[process.CROP_IMAGE](vm)
+  }
+  // append extra query
+  if (vm.extraQuery && providerPipe[process.APPEND_QUERY]) {
+    imageSrc = providerPipe[process.APPEND_QUERY](vm)
+  }
+  return imageSrc
 }

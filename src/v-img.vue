@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import providerConfig from './provider-config'
+import {providerConfig, default as getSrc} from './provider-config'
 
 /**
  * TODO:
@@ -92,6 +92,14 @@ export default {
     error: {
       type: String,
       default: ''
+    },
+
+    /**
+     * 是否开启自动裁剪
+     */
+    autocrop: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -142,7 +150,7 @@ export default {
       }
     },
     imageSrc() {
-      return providerConfig[this.provider].getSrc(this)
+      return getSrc(this)
     },
     loadingImage() {
       return this.placeholder || this.$vImg.placeholder
