@@ -116,7 +116,8 @@ export default {
            */
           return {
             backgroundColor: '#eeedeb',
-            objectFit: 'scale-down'
+            objectFit: 'scale-down',
+            cursor: 'pointer'
           }
         default:
           return {}
