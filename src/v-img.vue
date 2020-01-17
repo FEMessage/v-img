@@ -39,8 +39,6 @@ const STATUS_ERROR = 3
 export default {
   name: 'VImg',
 
-  pluginOptions: {},
-
   props: {
     /** 图片地址 */
     src: {
