@@ -79,11 +79,17 @@ export default {
       default: ''
     },
 
+    /**
+     * loading 时的占位图
+     */
     placeholder: {
       type: String,
       default: ''
     },
 
+    /**
+     * 图片加载失败时的占位图
+     */
     error: {
       type: String,
       default: ''
