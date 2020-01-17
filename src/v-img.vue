@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import providerConfig from './provider-config'
+import getSrc, {providerConfig} from './provider-config'
 import reload from './reload.svg'
 /**
  * TODO:
@@ -75,6 +75,14 @@ export default {
     extraQuery: {
       type: String,
       default: ''
+    },
+
+    /**
+     * 是否开启自动裁剪
+     */
+    autocrop: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -105,7 +113,7 @@ export default {
       }
     },
     imageSrc() {
-      return providerConfig[this.provider].getSrc(this)
+      return getSrc(this)
     }
   },
 
