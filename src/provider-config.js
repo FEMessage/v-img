@@ -31,7 +31,7 @@ export const providerConfig = {
       if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
       /**
        * 质量变换仅对jpg、webp有效。（png已被转为webp）
-       * @see https://help.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
+       * @see https://+\dhelp.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
        */
       if (is([png, jpg, webp], src)) query += '/quality,Q_75'
 
@@ -39,10 +39,42 @@ export const providerConfig = {
       return vm
     },
 
-    // [process.CROP_IMAGE](vm) {
-    //   const dpr = (window && window.devicePixelRatio) || 2
-    //   const actions = ['/resize']
-    // },
+    [process.CROP_IMAGE](vm) {
+      const {$src = '', width, height, autocrop, src} = vm
+
+      if (!autocrop || is(svg, src)) return vm
+      const DPR = 2
+      let dpr = (window && window.devicePixelRatio) || DPR
+      if (dpr === 1) {
+        dpr = DPR
+      }
+      const actions = ['/resize']
+      const WIDTH = `w_${width * dpr}`
+      const HEIGHT = `h_${height * dpr}`
+      const AUTOCROP = `m_fill`
+
+      if (isNaN(width) && isNaN(height)) {
+        return vm
+      }
+
+      if (!isNaN(width) && !isNaN(height)) {
+        actions.push(AUTOCROP)
+      }
+
+      if (!isNaN(height)) {
+        actions.push(HEIGHT)
+      }
+
+      if (!isNaN(width)) {
+        actions.push(WIDTH)
+      }
+
+      const resizeQuery = actions.join(',')
+
+      vm.$src = resizeQuery + $src
+
+      return vm
+    },
 
     [process.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
