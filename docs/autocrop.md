@@ -5,13 +5,25 @@
 <template>
   <div>
     <p> 原图 宽：400 高：267 </p>
-    <v-img src="//image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg"/>
+    <v-img :src="src"/>
     <p> 按宽度等比缩放 宽：100 高：等比缩放<p/>
-    <v-img src="//image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg" width="100"/>
+    <v-img :src="src" width="100"/>
     <p> 按高度等比缩放 高：100 宽：等比缩放<p/>
-    <v-img src="//image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg" height="100"/>
+    <v-img :src="src" height="100"/>
     <p> 固定宽高剪裁，宽高：100，居中裁剪，不拉伸图片 </p>
-    <v-img src="//image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg" height="100" width="100"/>
+    <v-img :src="src" height="100" width="100"/>
+    <p> 对背景图片使用自动裁剪 </p>
+    <div v-img="{src}" style="width:100px;height:100px;background-repeat:no-repeat;background-size: 100% auto"></div>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      src: 'https://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg'
+    }
+  }
+}
+</script>
 ```
