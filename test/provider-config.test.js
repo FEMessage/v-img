@@ -53,6 +53,53 @@ describe('alibaba', () => {
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75/${extraQuery}`)
   })
+
+  test('自动裁剪，只传 width', () => {
+    expect(
+      getSrc({
+        provider: 'alibaba',
+        src,
+        isSupportWebp: true,
+        autocrop: true,
+        width: 100
+      })
+    ).toBe(`${src}?x-oss-process=image/resize,w_200/format,webp/quality,Q_75`)
+  })
+  test('自动裁剪，只传 height', () => {
+    expect(
+      getSrc({
+        provider: 'alibaba',
+        src,
+        isSupportWebp: true,
+        autocrop: true,
+        height: 100
+      })
+    ).toBe(`${src}?x-oss-process=image/resize,h_200/format,webp/quality,Q_75`)
+  })
+  test('自动裁剪，height 和 width 都传', () => {
+    expect(
+      getSrc({
+        provider: 'alibaba',
+        src,
+        isSupportWebp: true,
+        autocrop: true,
+        height: 100,
+        width: 100
+      })
+    ).toBe(
+      `${src}?x-oss-process=image/resize,m_fill,h_200,w_200/format,webp/quality,Q_75`
+    )
+  })
+  test('自动裁剪，height 和 width 都不传', () => {
+    expect(
+      getSrc({
+        provider: 'alibaba',
+        src,
+        isSupportWebp: true,
+        autocrop: true
+      })
+    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
+  })
 })
 
 describe('qiniu', () => {
