@@ -42,7 +42,7 @@ export const providerConfig = {
     [process.CROP_IMAGE](vm) {
       const {$src = '', width, height, autocrop, src} = vm
 
-      if (!autocrop || is(svg, src)) return vm
+      if (!autocrop || is(svg, src) || !src) return vm
       const DPR = 2
       let dpr = (window && window.devicePixelRatio) || DPR
       if (dpr === 1) {
