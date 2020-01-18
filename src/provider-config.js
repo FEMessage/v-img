@@ -140,6 +140,7 @@ export const providerConfig = {
 }
 
 export default vm => {
+  vm.$src = ''
   const providerPipe = providerConfig[vm.provider]
   const output = pipe([
     providerPipe[process.CONVERT_WEBP],
