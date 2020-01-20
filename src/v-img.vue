@@ -119,10 +119,6 @@ export default {
           }
         case STATUS_ERROR:
           if (!this.hasLoading) return {}
-          /**
-           * 图片较小时，loading 图片按比例缩放展示；
-           * 图片较大时，loading 的圈圈则固定大小
-           */
           return {
             ...baseStyle,
             backgroundImage: `url(${this.reloadImage})`,
