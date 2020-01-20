@@ -31,7 +31,7 @@ export const providerConfig = {
       if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
       /**
        * 质量变换仅对jpg、webp有效。（png已被转为webp）
-       * @see https://+\dhelp.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
+       * @see https://help.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
        */
       if (is([png, jpg, webp], src)) query += '/quality,Q_75'
 
