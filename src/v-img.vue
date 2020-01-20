@@ -133,10 +133,10 @@ export default {
       return providerConfig[this.provider].getSrc(this)
     },
     loadingImage() {
-      return this.placeholder || this.$vimg.placeholder
+      return this.placeholder || this.$vImg.placeholder
     },
     reloadImage() {
-      return this.error || this.$vimg.error
+      return this.error || this.$vImg.error
     }
   },
 

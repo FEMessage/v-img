@@ -14,7 +14,7 @@ const defaultOptions = {
 // so calling it multiple times on the same plugin
 // will install the plugin only once
 Component.install = (Vue, options = {}) => {
-  Vue.prototype.$vimg = {...defaultOptions, ...options}
+  Vue.prototype.$vImg = {...defaultOptions, ...options}
 
   Vue.component(Component.name, Component)
 
