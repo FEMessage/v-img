@@ -107,9 +107,9 @@ export default {
     classname() {
       switch (this.status) {
         case STATUS_IDLE:
-          return `on_load`
+          return `on-loading`
         case STATUS_ERROR:
-          return `on_error`
+          return `on-error`
         default:
           return ``
       }
