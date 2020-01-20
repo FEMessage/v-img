@@ -6,7 +6,7 @@ function is(types, src) {
   return Array.isArray(types) ? types.some(t => t.test(src)) : types.test(src)
 }
 
-const process = {
+const srcProcess = {
   CONVERT_WEBP: 'convertWebp',
   CROP_IMAGE: 'cropImage',
   APPEND_QUERY: 'appendQuery'
@@ -25,7 +25,7 @@ const pipe = function(fns) {
 
 export const providerConfig = {
   alibaba: {
-    [process.CONVERT_WEBP](vm) {
+    [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
       let query = vm.$src || ''
       if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
@@ -39,7 +39,7 @@ export const providerConfig = {
       return vm
     },
 
-    [process.CROP_IMAGE](vm) {
+    [srcProcess.CROP_IMAGE](vm) {
       const {$src = '', width, height, autocrop, src} = vm
 
       if (!autocrop || is(svg, src) || !src) return vm
@@ -76,7 +76,7 @@ export const providerConfig = {
       return vm
     },
 
-    [process.APPEND_QUERY](vm) {
+    [srcProcess.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
       let query = vm.$src || ''
       if (extraQuery) query += '/' + extraQuery
@@ -93,7 +93,7 @@ export const providerConfig = {
     }
   },
   qiniu: {
-    [process.CONVERT_WEBP](vm) {
+    [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
       let query = vm.$src || ''
       // imageMogr2 接口可支持处理的原图片格式有 psd、jpeg、png、gif、webp、tiff、bmp
@@ -107,7 +107,7 @@ export const providerConfig = {
       return vm
     },
 
-    [process.APPEND_QUERY](vm) {
+    [srcProcess.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
       let query = vm.$src || ''
       if (extraQuery) query += '/' + extraQuery
@@ -120,7 +120,7 @@ export const providerConfig = {
     }
   },
   self: {
-    [process.CONVERT_WEBP](vm) {
+    [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
       if (isSupportWebp && is([png, jpg], src)) {
         vm.$src =
@@ -132,7 +132,7 @@ export const providerConfig = {
     }
   },
   none: {
-    [process.CONVERT_WEBP](vm) {
+    [srcProcess.CONVERT_WEBP](vm) {
       vm.$src = vm.src
       return vm
     }
@@ -143,9 +143,9 @@ export default vm => {
   vm.$src = ''
   const providerPipe = providerConfig[vm.provider]
   const output = pipe([
-    providerPipe[process.CONVERT_WEBP],
-    providerPipe[process.CROP_IMAGE],
-    providerPipe[process.APPEND_QUERY]
+    providerPipe[srcProcess.CONVERT_WEBP],
+    providerPipe[srcProcess.CROP_IMAGE],
+    providerPipe[srcProcess.APPEND_QUERY]
   ])(vm)
   return output.$src
 }
