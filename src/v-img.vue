@@ -1,6 +1,7 @@
 <template>
   <img
     class="v-img lazyload"
+    :class="classname"
     :style="style"
     :height="height"
     :width="width"
@@ -103,6 +104,17 @@ export default {
     }
   },
   computed: {
+    classname() {
+      switch (this.status) {
+        case STATUS_IDLE:
+          return `on_load`
+        case STATUS_ERROR:
+          return `on_error`
+        default:
+          return ``
+      }
+    },
+
     style() {
       const baseStyle = {
         backgroundSize: 'auto 22px',

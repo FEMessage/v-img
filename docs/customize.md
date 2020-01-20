@@ -14,6 +14,9 @@ Vue.ues(VImg, {
 ### 使用组件时，单独给组件设置
 自定义图案的使用逻辑： 组件属性设置 > 全局设置 > 默认设置
 
+### 修改占位图的大小
+load 时可以用类名 `.on_load`, error 时可以用类名 `.on_error` 覆盖默认的样式
+
 ```vue
 <template>
   <div>
@@ -23,4 +26,10 @@ Vue.ues(VImg, {
     <v-img src="none" width="375" height="375" error="https://deepexi-moby.oss-cn-shenzhen.aliyuncs.com/femessage/iconmonstr-refresh-6.svg"/>
   </div>
 </template>
+
+<style>
+.v-img.on_load, .v-img.on_error {
+  background-size: auto !important;
+}
+</style>
 ```
