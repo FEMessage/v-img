@@ -1,6 +1,6 @@
 {
   "name": "@femessage/v-img",
-  "version": "1.3.2",
+  "version": "1.4.0",
   "description": "📸 use webp and lazyload images",
   "author": "https://github.com/FEMessage",
   "license": "MIT",

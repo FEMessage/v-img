@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/FEMessage/v-img/compare/v1.3.2...v1.4.0) (2020-01-21)
+
+
+### Features
+
+* alioss 图片资源支持 自动剪裁 ([#16](https://github.com/FEMessage/v-img/issues/16)) ([5bbff8a](https://github.com/FEMessage/v-img/commit/5bbff8a))
+* 支持自定义 loading 和 error 的图标 ([#14](https://github.com/FEMessage/v-img/issues/14)) ([50ebd9c](https://github.com/FEMessage/v-img/commit/50ebd9c))
+
+
+
 ### [1.3.2](https://github.com/FEMessage/v-img/compare/v1.3.1...v1.3.2) (2020-01-15)
 
 
