@@ -1,11 +1,12 @@
 <template>
   <img
     class="v-img lazyload"
+    :class="classname"
     :style="style"
     :height="height"
     :width="width"
     :data-src="imageSrc"
-    :src="hasLoading ? `${require('./spinner.svg')}` : transparentImg"
+    :src="transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"
     v-on="$listeners"
@@ -16,8 +17,8 @@
 </template>
 
 <script>
-import providerConfig from './provider-config'
-import reload from './reload.svg'
+import {providerConfig, default as getSrc} from './provider-config'
+
 /**
  * TODO:
  * [ ] 可以考虑在check完isSupportWebp后再动态引入lazySizes
@@ -75,6 +76,30 @@ export default {
     extraQuery: {
       type: String,
       default: ''
+    },
+
+    /**
+     * loading 时的占位图
+     */
+    placeholder: {
+      type: String,
+      default: ''
+    },
+
+    /**
+     * 图片加载失败时的占位图
+     */
+    error: {
+      type: String,
+      default: ''
+    },
+
+    /**
+     * 是否开启自动裁剪
+     */
+    autocrop: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -87,25 +112,51 @@ export default {
     }
   },
   computed: {
-    style() {
+    classname() {
       switch (this.status) {
         case STATUS_IDLE:
+          return `on-loading`
+        case STATUS_ERROR:
+          return `on-error`
+        default:
+          return ``
+      }
+    },
+
+    style() {
+      const baseStyle = {
+        backgroundSize: 'auto 22px',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#f0f2f5'
+      }
+      switch (this.status) {
+        case STATUS_IDLE:
+          if (!this.hasLoading) return {}
+          return {
+            ...baseStyle,
+            backgroundImage: `url(${this.loadingImage})`
+          }
         case STATUS_ERROR:
           if (!this.hasLoading) return {}
-          /**
-           * 图片较小时，loading 图片按比例缩放展示；
-           * 图片较大时，loading 的圈圈则固定大小
-           */
           return {
-            backgroundColor: '#eeedeb',
-            objectFit: 'scale-down'
+            ...baseStyle,
+            backgroundImage: `url(${this.reloadImage})`,
+            backgroundSize: 'auto 40px',
+            cursor: 'pointer'
           }
         default:
           return {}
       }
     },
     imageSrc() {
-      return providerConfig[this.provider].getSrc(this)
+      return getSrc(this)
+    },
+    loadingImage() {
+      return this.placeholder || this.$vImg.placeholder
+    },
+    reloadImage() {
+      return this.error || this.$vImg.error
     }
   },
 
@@ -155,7 +206,7 @@ export default {
     },
     onError() {
       this.status = STATUS_ERROR
-      this.$el.setAttribute('src', reload)
+      this.$el.setAttribute('src', this.transparentImg)
     },
     onClick() {
       if (this.status === STATUS_ERROR) this.forceUpdateSrc()

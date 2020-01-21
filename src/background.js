@@ -1,24 +1,39 @@
 import 'lazysizes/plugins/bgset/ls.bgset'
-import providerConf from './provider-config'
+import getImageSrc from './provider-config'
 
 function getSrc(config) {
   const isSupportWebp =
     JSON.parse(localStorage.getItem('isSupportWebp')) || false
-  const {provider = 'alibaba', extraQuery, src} = config
+  const {
+    provider = 'alibaba',
+    extraQuery,
+    src,
+    width,
+    height,
+    autocrop = true
+  } = config
   if (!src) {
     return
   }
 
-  return providerConf[provider].getSrc({
+  return getImageSrc({
+    autocrop,
+    provider,
     src,
     isSupportWebp,
-    extraQuery
+    extraQuery,
+    width,
+    height
   })
 }
 
 export default {
   init(el, {value = {}}) {
-    const src = getSrc(value)
+    const size = {
+      width: el.offsetWidth,
+      height: el.offsetHeight
+    }
+    const src = getSrc({...size, ...value})
     el.classList.add('lazyload')
     el.setAttribute('data-bgset', src)
   },
