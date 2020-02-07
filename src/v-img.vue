@@ -6,6 +6,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc"
+    :data-big-image="bigImageSrc"
     :src="transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"
@@ -17,7 +18,11 @@
 </template>
 
 <script>
-import {providerConfig, default as getSrc} from './provider-config'
+import {
+  providerConfig,
+  getBigImageSrc,
+  default as getSrc
+} from './provider-config'
 
 /**
  * TODO:
@@ -148,6 +153,9 @@ export default {
         default:
           return {}
       }
+    },
+    bigImageSrc() {
+      return getBigImageSrc(this)
     },
     imageSrc() {
       return getSrc(this)
