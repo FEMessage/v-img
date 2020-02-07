@@ -149,3 +149,13 @@ export default vm => {
   ])(vm)
   return output.$src
 }
+
+export const getBigImageSrc = vm => {
+  vm.$src = ''
+  const providerPipe = providerConfig[vm.provider]
+  const output = pipe([
+    providerPipe[srcProcess.CONVERT_WEBP],
+    providerPipe[srcProcess.APPEND_QUERY]
+  ])(vm)
+  return output.$src
+}
