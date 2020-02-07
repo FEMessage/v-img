@@ -160,6 +160,16 @@ describe('qiniu', () => {
       })
     ).toBe(`${src}?imageMogr2/format/webp/quality/75/${extraQuery}`)
   })
+
+  test('测试预览图片链接', () => {
+    expect(
+      getPreviewSrc({
+        provider: 'qiniu',
+        src,
+        isSupportWebp: true
+      })
+    ).toBe(`${src}?imageMogr2/format/webp`)
+  })
 })
 
 describe('self', () => {
