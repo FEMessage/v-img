@@ -1,6 +1,7 @@
 import _getSrc from '../src/provider-config'
 
 const getSrc = val => _getSrc(val).$src
+const getPreviewSrc = val => _getSrc(val).$previewSrc
 
 describe('alibaba', () => {
   const src = 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
@@ -101,6 +102,16 @@ describe('alibaba', () => {
         autocrop: true
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
+  })
+
+  test('测试预览图片链接', () => {
+    expect(
+      getPreviewSrc({
+        provider: 'alibaba',
+        src,
+        isSupportWebp: true
+      })
+    ).toBe(`${src}?x-oss-process=image/format,webp`)
   })
 })
 
