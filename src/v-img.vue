@@ -18,11 +18,7 @@
 </template>
 
 <script>
-import {
-  providerConfig,
-  getPreviewSrc,
-  default as getSrc
-} from './provider-config'
+import {providerConfig, default as getSrc} from './provider-config'
 
 /**
  * TODO:
@@ -153,9 +149,6 @@ export default {
         default:
           return {}
       }
-    },
-    previewSrc() {
-      return getPreviewSrc(this)
     },
     imageSrc() {
       return getSrc(this)
