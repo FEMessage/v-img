@@ -28,7 +28,12 @@ export const providerConfig = {
     [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
       let query = vm.$src || ''
-      if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
+      let previewQuery = vm.$previewSrc || ''
+
+      if (isSupportWebp && is([png, jpg], src)) {
+        query += '/format,webp'
+        previewQuery += '/format,webp'
+      }
       /**
        * 质量变换仅对jpg、webp有效。（png已被转为webp）
        * @see https://help.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
@@ -36,6 +41,7 @@ export const providerConfig = {
       if (is([png, jpg, webp], src)) query += '/quality,Q_75'
 
       vm.$src = query
+      vm.$previewSrc = previewQuery
       return vm
     },
 
@@ -79,16 +85,24 @@ export const providerConfig = {
     [srcProcess.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
       let query = vm.$src || ''
-      if (extraQuery) query += '/' + extraQuery
-      if (query) {
-        query =
-          src +
-          (src.indexOf('?') > -1 ? '&' : '?') +
-          'x-oss-process=image' +
-          query
+      let previewQuery = vm.$previewSrc || ''
+
+      const resolveQuery = q => {
+        if (q) {
+          q =
+            src +
+            (src.indexOf('?') > -1 ? '&' : '?') +
+            'x-oss-process=image' +
+            q
+        }
+
+        return q
       }
 
-      vm.$src = query || src
+      if (extraQuery) query += '/' + extraQuery
+
+      vm.$src = resolveQuery(query) || src
+      vm.$previewSrc = resolveQuery(previewQuery) || src
       return vm
     }
   },
@@ -141,21 +155,12 @@ export const providerConfig = {
 
 export default vm => {
   vm.$src = ''
+  vm.$previewSrc = ''
   const providerPipe = providerConfig[vm.provider]
   const output = pipe([
     providerPipe[srcProcess.CONVERT_WEBP],
     providerPipe[srcProcess.CROP_IMAGE],
     providerPipe[srcProcess.APPEND_QUERY]
   ])(vm)
-  return output.$src
-}
-
-export const getPreviewSrc = vm => {
-  vm.$src = ''
-  const providerPipe = providerConfig[vm.provider]
-  const output = pipe([
-    providerPipe[srcProcess.CONVERT_WEBP],
-    providerPipe[srcProcess.APPEND_QUERY]
-  ])(vm)
-  return output.$src
+  return output
 }
