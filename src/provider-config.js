@@ -110,26 +110,38 @@ export const providerConfig = {
     [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
       let query = vm.$src || ''
+      let previewQuery = vm.$previewSrc || ''
       // imageMogr2 接口可支持处理的原图片格式有 psd、jpeg、png、gif、webp、tiff、bmp
       if (is(svg, src)) {
         return vm
       }
-      if (isSupportWebp && is([png, jpg], src)) query += '/format/webp'
+      if (isSupportWebp && is([png, jpg], src)) {
+        query += '/format/webp'
+        previewQuery += '/format/webp'
+      }
       query += '/quality/75'
 
       vm.$src = query
+      vm.$previewSrc = previewQuery
       return vm
     },
 
     [srcProcess.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
       let query = vm.$src || ''
+      let previewQuery = vm.$previewSrc || ''
       if (extraQuery) query += '/' + extraQuery
-      if (query) {
-        query = src + (src.indexOf('?') > -1 ? '&' : '?') + 'imageMogr2' + query
+
+      const resolveQuery = q => {
+        if (q) {
+          q = src + (src.indexOf('?') > -1 ? '&' : '?') + 'imageMogr2' + q
+        }
+
+        return q
       }
 
-      vm.$src = query || src
+      vm.$src = resolveQuery(query) || src
+      vm.$previewSrc = resolveQuery(previewQuery) || src
       return vm
     }
   },
