@@ -1,4 +1,6 @@
-import getSrc from '../src/provider-config'
+import _getSrc from '../src/provider-config'
+
+const getSrc = val => _getSrc(val).$src
 
 describe('alibaba', () => {
   const src = 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
@@ -8,7 +10,7 @@ describe('alibaba', () => {
         provider: 'alibaba',
         src,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
   test('浏览器不支持webp', () => {
@@ -17,7 +19,7 @@ describe('alibaba', () => {
         provider: 'alibaba',
         src,
         isSupportWebp: false
-      }).$src
+      })
     ).toBe(`${src}?x-oss-process=image/quality,Q_75`)
   })
   test('浏览器支持webp，但图片不是(png|jpe?g)', () => {
@@ -27,19 +29,19 @@ describe('alibaba', () => {
         provider: 'alibaba',
         src: webp,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${webp}?x-oss-process=image/quality,Q_75`)
   })
   test('svg不处理，除非有extraQuery', () => {
     const svg = src.replace('png', 'svg')
     const extraQuery = 'rotate,10'
-    expect(getSrc({provider: 'alibaba', src: svg}).$src).toBe(svg)
+    expect(getSrc({provider: 'alibaba', src: svg})).toBe(svg)
     expect(
       getSrc({
         provider: 'alibaba',
         src: svg,
         extraQuery
-      }).$src
+      })
     ).toBe(`${svg}?x-oss-process=image/${extraQuery}`)
   })
   test('带extraQuery的情况', () => {
@@ -50,7 +52,7 @@ describe('alibaba', () => {
         src,
         isSupportWebp: true,
         extraQuery
-      }).$src
+      })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75/${extraQuery}`)
   })
 
@@ -62,7 +64,7 @@ describe('alibaba', () => {
         isSupportWebp: true,
         autocrop: true,
         width: 100
-      }).$src
+      })
     ).toBe(`${src}?x-oss-process=image/resize,w_200/format,webp/quality,Q_75`)
   })
   test('自动裁剪，只传 height', () => {
@@ -73,7 +75,7 @@ describe('alibaba', () => {
         isSupportWebp: true,
         autocrop: true,
         height: 100
-      }).$src
+      })
     ).toBe(`${src}?x-oss-process=image/resize,h_200/format,webp/quality,Q_75`)
   })
   test('自动裁剪，height 和 width 都传', () => {
@@ -85,7 +87,7 @@ describe('alibaba', () => {
         autocrop: true,
         height: 100,
         width: 100
-      }).$src
+      })
     ).toBe(
       `${src}?x-oss-process=image/resize,m_fill,h_200,w_200/format,webp/quality,Q_75`
     )
@@ -97,7 +99,7 @@ describe('alibaba', () => {
         src,
         isSupportWebp: true,
         autocrop: true
-      }).$src
+      })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
 })
@@ -110,7 +112,7 @@ describe('qiniu', () => {
         provider: 'qiniu',
         src,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${src}?imageMogr2/format/webp/quality/75`)
   })
   test('浏览器不支持webp', () => {
@@ -119,7 +121,7 @@ describe('qiniu', () => {
         provider: 'qiniu',
         src,
         isSupportWebp: false
-      }).$src
+      })
     ).toBe(`${src}?imageMogr2/quality/75`)
   })
   test('浏览器支持webp，但图片不是(png|jpe?g)', () => {
@@ -129,12 +131,12 @@ describe('qiniu', () => {
         provider: 'qiniu',
         src: webp,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${webp}?imageMogr2/quality/75`)
   })
   test('svg不处理', () => {
     const svg = src.replace('jpg', 'svg')
-    expect(getSrc({provider: 'qiniu', src: svg}).$src).toBe(svg)
+    expect(getSrc({provider: 'qiniu', src: svg})).toBe(svg)
   })
   test('带extraQuery的情况', () => {
     const extraQuery = 'rotate/10'
@@ -144,7 +146,7 @@ describe('qiniu', () => {
         src,
         isSupportWebp: true,
         extraQuery
-      }).$src
+      })
     ).toBe(`${src}?imageMogr2/format/webp/quality/75/${extraQuery}`)
   })
 })
@@ -157,7 +159,7 @@ describe('self', () => {
         provider: 'self',
         src,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${src}.webp`)
   })
 
@@ -169,7 +171,7 @@ describe('self', () => {
         provider: 'self',
         src: src + query,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${src}.webp${query}`)
   })
 
@@ -180,7 +182,7 @@ describe('self', () => {
         provider: 'self',
         src,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${src}.webp`)
   })
 
@@ -191,7 +193,7 @@ describe('self', () => {
         provider: 'self',
         src,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(`${src}.webp`)
   })
 
@@ -202,7 +204,7 @@ describe('self', () => {
         provider: 'self',
         src,
         isSupportWebp: true
-      }).$src
+      })
     ).toBe(src)
   })
 })
