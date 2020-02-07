@@ -24,7 +24,7 @@ function getSrc(config) {
     extraQuery,
     width,
     height
-  })
+  }).$src
 }
 
 export default {
