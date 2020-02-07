@@ -150,7 +150,7 @@ export default vm => {
   return output.$src
 }
 
-export const getBigImageSrc = vm => {
+export const getPreviewSrc = vm => {
   vm.$src = ''
   const providerPipe = providerConfig[vm.provider]
   const output = pipe([

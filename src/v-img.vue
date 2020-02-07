@@ -6,7 +6,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc"
-    :data-big-image="bigImageSrc"
+    :data-preview-src="previewSrc"
     :src="transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"
@@ -20,7 +20,7 @@
 <script>
 import {
   providerConfig,
-  getBigImageSrc,
+  getPreviewSrc,
   default as getSrc
 } from './provider-config'
 
@@ -154,8 +154,8 @@ export default {
           return {}
       }
     },
-    bigImageSrc() {
-      return getBigImageSrc(this)
+    previewSrc() {
+      return getPreviewSrc(this)
     },
     imageSrc() {
       return getSrc(this)
