@@ -1,4 +1,7 @@
-import getSrc from '../src/provider-config'
+import _getSrc from '../src/provider-config'
+
+const getSrc = val => _getSrc(val).$src
+const getNonCropSrc = val => _getSrc(val).$nonCropSrc
 
 describe('alibaba', () => {
   const src = 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
@@ -97,6 +100,19 @@ describe('alibaba', () => {
         src,
         isSupportWebp: true,
         autocrop: true
+      })
+    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
+  })
+
+  test('获取不经过裁剪的 url', () => {
+    expect(
+      getNonCropSrc({
+        provider: 'alibaba',
+        src,
+        isSupportWebp: true,
+        autocrop: true,
+        height: 100,
+        width: 100
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
