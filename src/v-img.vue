@@ -6,7 +6,7 @@
     :height="height"
     :width="width"
     :data-src="imageSrc.$src"
-    :non-crop-src="imageSrc.$nonCropSrc"
+    :uncropped-src="imageSrc.$unCroppedSrc"
     :src="transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"

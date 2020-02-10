@@ -149,6 +149,6 @@ export default vm => {
     providerPipe[srcProcess.CROP_IMAGE],
     providerPipe[srcProcess.APPEND_QUERY]
   ])(vm)
-  vm.$nonCropSrc = vm.$src.replace(vm.$config.resizeQuery, '')
+  vm.$unCroppedSrc = vm.$src.replace(vm.$config.resizeQuery, '')
   return output
 }
