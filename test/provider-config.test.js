@@ -1,7 +1,7 @@
 import _getSrc from '../src/provider-config'
 
 const getSrc = val => _getSrc(val).$src
-const getUnCroppedSrc = val => _getSrc(val).$unCroppedSrc
+const getUncroppedSrc = val => _getSrc(val).$uncroppedSrc
 
 describe('alibaba', () => {
   const src = 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
@@ -106,7 +106,7 @@ describe('alibaba', () => {
 
   test('获取不经过裁剪的 url', () => {
     expect(
-      getUnCroppedSrc({
+      getUncroppedSrc({
         provider: 'alibaba',
         src,
         isSupportWebp: true,
