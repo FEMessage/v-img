@@ -9,7 +9,8 @@ v-img 内部提供了一个未经过裁剪的 url 属性(non-crop-src), 因此�
   <v-img
     v-img-preview:non-crop-src
     :src="src"
-    width="400"
+    height="100"
+    width="100"
   />
 </template>
 
