@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import ImgPreview from '@femessage/img-preview/src'
+import ImgPreview from '@femessage/img-preview'
 import VImg from '../src'
 
 Vue.use(ImgPreview)
