@@ -782,6 +782,11 @@
     require-yaml "0.0.1"
     valid-url "^1.0.9"
 
+"@femessage/img-preview@^1.4.1":
+  version "1.4.1"
+  resolved "http://levy.ren:4873/@femessage%2fimg-preview/-/img-preview-1.4.1.tgz#107daf5c75343a2ea0877835fbfbe8f5e42f9dfe"
+  integrity sha512-JzW6Cmi3xktA63Lm8Lvn0CK8DmZOappwI65eh2HS2QEi/I/w85o2KgQst6NuW0CSfaf/h14jWRMbVo4GO4V7QA==
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.npm.taobao.org/@jest/console/download/@jest/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
