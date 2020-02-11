@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/FEMessage/v-img/compare/v1.4.0...v1.5.0) (2020-02-11)
+
+
+### Features
+
+* 添加不经过自动裁剪的资源链接的属性(data-uncropped-src) ([#19](https://github.com/FEMessage/v-img/issues/19)) ([0c9bd52](https://github.com/FEMessage/v-img/commit/0c9bd52))
+
+
+
 ## [1.4.0](https://github.com/FEMessage/v-img/compare/v1.3.2...v1.4.0) (2020-01-21)
 
 
