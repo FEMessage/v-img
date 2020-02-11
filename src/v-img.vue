@@ -5,7 +5,8 @@
     :style="style"
     :height="height"
     :width="width"
-    :data-src="imageSrc"
+    :data-src="imageSrc.$src"
+    :data-uncropped-src="imageSrc.$uncroppedSrc"
     :src="transparentImg"
     v-bind="$attrs"
     referrerpolicy="no-referrer"
@@ -198,10 +199,10 @@ export default {
       localStorage.setItem('isSupportWebp', this.isSupportWebp)
     },
     forceUpdateSrc() {
-      this.$el.setAttribute('src', this.imageSrc)
+      this.$el.setAttribute('src', this.imageSrc.$src)
     },
     onLoad() {
-      if (this.$el.getAttribute('src') === this.imageSrc)
+      if (this.$el.getAttribute('src') === this.imageSrc.$src)
         this.status = STATUS_LOADED
     },
     onError() {
