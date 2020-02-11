@@ -782,6 +782,11 @@
     require-yaml "0.0.1"
     valid-url "^1.0.9"
 
+"@femessage/img-preview@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.npmjs.org/@femessage/img-preview/-/img-preview-1.4.0.tgz#0a9e6ac99e17f99c3b4012791f1f742082deb591"
+  integrity sha512-Zb22L13I82PClPf0aMKALgU7P5QT8OahyfPgHWVxJlWkBVHtCFkaZoAznb6/2E/prybx/mTBYswgYQ6UdzfBug==
+
 "@jest/console@^24.7.1":
   version "24.7.1"
   resolved "https://registry.npm.taobao.org/@jest/console/download/@jest/console-24.7.1.tgz#32a9e42535a97aedfe037e725bd67e954b459545"
