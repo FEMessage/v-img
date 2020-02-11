@@ -199,10 +199,10 @@ export default {
       localStorage.setItem('isSupportWebp', this.isSupportWebp)
     },
     forceUpdateSrc() {
-      this.$el.setAttribute('src', this.imageSrc)
+      this.$el.setAttribute('src', this.imageSrc.$src)
     },
     onLoad() {
-      if (this.$el.getAttribute('src') === this.imageSrc)
+      if (this.$el.getAttribute('src') === this.imageSrc.$src)
         this.status = STATUS_LOADED
     },
     onError() {
