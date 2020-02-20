@@ -84,6 +84,7 @@ images/
 
 ## Links
 
+- [把图片优化指南做成一个组件：v-img 介绍](https://zhuanlan.zhihu.com/p/99769484)
 - [api](https://FEMessage.github.io/v-img/)
 - [设计文档](https://www.yuque.com/docs/share/6edaadbb-9260-4b49-90d7-0a8d8d03b1de)
 - [webp](https://developers.google.com/speed/webp)
