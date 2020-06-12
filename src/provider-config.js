@@ -49,8 +49,8 @@ export const providerConfig = {
         dpr = DPR
       }
       const actions = ['/resize']
-      const WIDTH = `w_${width * dpr}`
-      const HEIGHT = `h_${height * dpr}`
+      const WIDTH = `w_${parseInt(width * dpr)}`
+      const HEIGHT = `h_${parseInt(height * dpr)}`
       const AUTOCROP = `m_fill`
 
       if (isNaN(width) && isNaN(height)) {

@@ -1,4 +1,3 @@
-import 'lazysizes/plugins/bgset/ls.bgset'
 import getImageSrc from './provider-config'
 
 function getSrc(config) {

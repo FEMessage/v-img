@@ -30,7 +30,6 @@ import {providerConfig, default as getSrc} from './provider-config'
  * 如果顺序是1 => 2，则是理想的
  * 如果顺序是2 => 1，则图片会被请求两次：一是原始src；二是转换为webp的src
  */
-import 'lazysizes'
 
 const STATUS_IDLE = 0
 // 目前没有必要区分 idle 和 loading，暂且保留标识符
