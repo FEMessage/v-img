@@ -6,17 +6,19 @@ export default function(script) {
       reject(new Error('Script is not found'))
     }
     if (loaded.has(script)) {
-      resolve('loaded')
-    }
-    const loadScript = document.createElement('script')
-    loadScript.onload = function() {
-      loaded.add(script)
       resolve(true)
+    } else {
+      const loadScript = document.createElement('script')
+      loadScript.onload = function() {
+        loaded.add(script)
+        resolve(true)
+      }
+      loadScript.onerror = function(err) {
+        loadScript.remove()
+        reject(err)
+      }
+      loadScript.src = script
+      document.body.appendChild(loadScript)
     }
-    loadScript.onerror = function(err) {
-      reject(err)
-    }
-    loadScript.src = script
-    document.body.appendChild(loadScript)
   })
 }
