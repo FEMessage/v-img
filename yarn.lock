@@ -757,7 +757,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@femessage/github-release-notes@^0.19.0":
+"@femessage/github-release-notes@latest":
   version "0.19.0"
   resolved "https://registry.npmjs.org/@femessage/github-release-notes/-/github-release-notes-0.19.0.tgz#483767c6a52d3a1086000442580503fed72a0898"
   integrity sha512-p97YOnBoLfgiWknF5bzqlUOTHIBcBpI8L7bpekPls3annTV65TGfdkl2ICZZAvhjIcl9usDqGFj6pJWj+R+Rzw==
