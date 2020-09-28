@@ -44,13 +44,14 @@ export const providerConfig = {
 
       if (!autocrop || is(svg, src) || !src) return vm
       const DPR = 2
-      let dpr = (window && window.devicePixelRatio) || DPR
+      let dpr =
+        (typeof window !== 'undefined' && window.devicePixelRatio) || DPR
       if (dpr === 1) {
         dpr = DPR
       }
       const actions = ['/resize']
-      const WIDTH = `w_${width * dpr}`
-      const HEIGHT = `h_${height * dpr}`
+      const WIDTH = `w_${parseInt(width * dpr)}`
+      const HEIGHT = `h_${parseInt(height * dpr)}`
       const AUTOCROP = `m_fill`
 
       if (isNaN(width) && isNaN(height)) {
