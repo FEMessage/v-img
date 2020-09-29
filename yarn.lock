@@ -6749,11 +6749,6 @@ lazy-property@~1.0.0:
   resolved "https://registry.npmjs.org/lazy-property/-/lazy-property-1.0.0.tgz#84ddc4b370679ba8bd4cdcfa4c06b43d57111147"
   integrity sha1-hN3Es3Bnm6i9TNz6TAa0PVcREUc=
 
-lazysizes@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.npm.taobao.org/lazysizes/download/lazysizes-5.1.1.tgz#7ca0266519d531ce740d6782e42faf700883646c"
-  integrity sha1-fKAmZRnVMc50DWeC5C+vcAiDZGw=
-
 lcid@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/lcid/download/lcid-2.0.0.tgz#6ef5d2df60e52f82eb228a4c373e8d1f397253cf"

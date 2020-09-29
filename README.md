@@ -28,6 +28,7 @@ This component aims to replace native img element and use webp!
 - Support cloud image service
   - [x] Alibaba
   - [x] Qiniu
+- Support SSR
 
 [⬆ Back to Top](#table-of-contents)
 
