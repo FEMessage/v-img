@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/FEMessage/v-img/compare/v1.5.0...v1.6.0) (2020-09-29)
+
+
+### Features
+
+* 支持 ssr ([#29](https://github.com/FEMessage/v-img/issues/29)) ([82155f7](https://github.com/FEMessage/v-img/commit/82155f7))
+
+
+
 ## [1.5.0](https://github.com/FEMessage/v-img/compare/v1.4.0...v1.5.0) (2020-02-11)
 
 
