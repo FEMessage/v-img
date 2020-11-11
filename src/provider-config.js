@@ -73,7 +73,7 @@ export const providerConfig = {
       const resizeQuery = actions.join(',')
 
       vm.$src = resizeQuery + $src
-      vm.$config.resizeQuery = resizeQuery
+      vm.$resizeQuery = resizeQuery
 
       return vm
     },
@@ -143,13 +143,12 @@ export const providerConfig = {
 
 export default vm => {
   vm.$src = ''
-  vm.$config = {}
   const providerPipe = providerConfig[vm.provider]
   const output = pipe([
     providerPipe[srcProcess.CONVERT_WEBP],
     providerPipe[srcProcess.CROP_IMAGE],
     providerPipe[srcProcess.APPEND_QUERY]
   ])(vm)
-  vm.$uncroppedSrc = vm.$src.replace(vm.$config.resizeQuery, '')
+  vm.$uncroppedSrc = vm.$src.replace(vm.$resizeQuery, '')
   return output
 }
