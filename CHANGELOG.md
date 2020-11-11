@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/FEMessage/v-img/compare/v1.6.0...v1.7.0) (2020-11-11)
+
+
+### Bug Fixes
+
+* **provide-config:** 避免与 vue.$config 冲突 ([a44fad6](https://github.com/FEMessage/v-img/commit/a44fad6))
+
+
+### Features
+
+* add types ([#32](https://github.com/FEMessage/v-img/issues/32)) ([9931f3c](https://github.com/FEMessage/v-img/commit/9931f3c))
+
+
+
 ## [1.6.0](https://github.com/FEMessage/v-img/compare/v1.5.0...v1.6.0) (2020-09-29)
 
 
