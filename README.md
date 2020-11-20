@@ -26,8 +26,9 @@ This component aims to replace native img element and use webp!
 - Input jpg/png, output webp(svg/gif not be processed)
 - Automatically check whether your browser support webp and use it
 - Support cloud image service
-  - [x] Alibaba
-  - [x] Qiniu
+  - [x] Alibaba Cloud
+  - [x] Huawei Cloud
+  - [x] Qiniu Cloud
 - Support SSR
 
 [⬆ Back to Top](#table-of-contents)
@@ -50,7 +51,7 @@ yarn add @femessage/v-img
 
 The component use `provider` to choose image processing strategy, here are available values:
 
-- alibaba(default)
+- alibaba(default value, and it's compatible with Huawei Cloud)
 - qiniu
 - self
 - none

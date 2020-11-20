@@ -25,6 +25,7 @@
 - 根据浏览器环境自动选择是否使用 webp
 - 支持云服务
   - [x] 阿里云
+  - [x] 华为云
   - [x] 七牛
 - 支持 SSR
 
@@ -46,7 +47,7 @@ yarn add @femessage/v-img
 
 设置 `provider` 来使用不同的图片处理方案，`provider` 参数有以下选项：
 
-- alibaba（默认）
+- alibaba（默认，同样适用于华为云）
 - qiniu
 - self
 - none
