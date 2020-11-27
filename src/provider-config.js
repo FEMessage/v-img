@@ -27,7 +27,9 @@ export const providerConfig = {
   alibaba: {
     [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
-      let query = vm.$src || ''
+      if (!src) return vm
+
+      let query = ''
       if (isSupportWebp && is([png, jpg], src)) query += '/format,webp'
       /**
        * 质量变换仅对jpg、webp有效。（png已被转为webp）
@@ -43,6 +45,8 @@ export const providerConfig = {
       const {$src = '', width, height, autocrop, src} = vm
 
       if (!autocrop || is(svg, src) || !src) return vm
+      if (isNaN(width) && isNaN(height)) return vm
+
       const DPR = 2
       let dpr =
         (typeof window !== 'undefined' && window.devicePixelRatio) || DPR
@@ -53,10 +57,6 @@ export const providerConfig = {
       const WIDTH = `w_${parseInt(width * dpr)}`
       const HEIGHT = `h_${parseInt(height * dpr)}`
       const AUTOCROP = `m_fill`
-
-      if (isNaN(width) && isNaN(height)) {
-        return vm
-      }
 
       if (!isNaN(width) && !isNaN(height)) {
         actions.push(AUTOCROP)
@@ -80,6 +80,9 @@ export const providerConfig = {
 
     [srcProcess.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
+      // null 无法通过解构设置默认值的方式改变值，依然会是 null，不如直接返回
+      if (!src) return vm
+
       let query = vm.$src || ''
       if (extraQuery) query += '/' + extraQuery
       if (query) {
@@ -97,6 +100,8 @@ export const providerConfig = {
   qiniu: {
     [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
+      if (!src) return vm
+
       let query = vm.$src || ''
       // imageMogr2 接口可支持处理的原图片格式有 psd、jpeg、png、gif、webp、tiff、bmp
       if (is(svg, src)) {
@@ -111,6 +116,8 @@ export const providerConfig = {
 
     [srcProcess.APPEND_QUERY](vm) {
       const {src, extraQuery} = vm
+      if (!src) return vm
+
       let query = vm.$src || ''
       if (extraQuery) query += '/' + extraQuery
       if (query) {
@@ -124,6 +131,8 @@ export const providerConfig = {
   self: {
     [srcProcess.CONVERT_WEBP](vm) {
       const {src, isSupportWebp} = vm
+      if (!src) return vm
+
       if (isSupportWebp && is([png, jpg], src)) {
         vm.$src =
           src.indexOf('?') > -1 ? src.replace('?', '.webp?') : src + '.webp'
@@ -135,12 +144,18 @@ export const providerConfig = {
   },
   none: {
     [srcProcess.CONVERT_WEBP](vm) {
-      vm.$src = vm.src
+      vm.$src = vm.src || ''
       return vm
     }
   }
 }
 
+/**
+ * 传入配置，根据 src 注入 $src，在 v-img 组件中使用的是 $src
+ * 但在 APPEND_QUERY 步骤之前，其实 $src 代表的是 query
+ * @param vm
+ * @returns 注入了 $src 的 vm
+ */
 export default vm => {
   vm.$src = ''
   const providerPipe = providerConfig[vm.provider]
