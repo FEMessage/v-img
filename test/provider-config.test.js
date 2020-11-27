@@ -116,6 +116,22 @@ describe('alibaba', () => {
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
+
+  test('测试 src 为空', () => {
+    expect(
+      getSrc({
+        provider: 'alibaba',
+        src: ''
+      })
+    ).toBe('')
+
+    expect(
+      getSrc({
+        provider: 'alibaba',
+        src: null
+      })
+    ).toBe('')
+  })
 })
 
 describe('qiniu', () => {
