@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/FEMessage/v-img/compare/v1.7.0...v1.7.1) (2020-11-27)
+
+
+### Bug Fixes
+
+* 兼容传 src 为 null 的情况 ([#34](https://github.com/FEMessage/v-img/issues/34)) ([af14ad1](https://github.com/FEMessage/v-img/commit/af14ad1))
+
+
+
 ## [1.7.0](https://github.com/FEMessage/v-img/compare/v1.6.0...v1.7.0) (2020-11-11)
 
 
