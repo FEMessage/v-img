@@ -48,13 +48,11 @@ export default {
     },
     /** 图片宽度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     width: {
-      type: [String, Number],
-      default: 'auto'
+      type: [String, Number]
     },
     /** 图片高度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     height: {
-      type: [String, Number],
-      default: 'auto'
+      type: [String, Number]
     },
     /** 是否需要 loading 效果 */
     hasLoading: {
@@ -179,7 +177,7 @@ export default {
     checkLayout() {
       if (!this.width && !this.height) {
         console.warn(
-          'You better set image width or height attribute, otherwise v-img lazyload may not work correctly'
+          'You better set image width or height attribute, otherwise v-img lazyload may not work properly'
         )
       }
     },
