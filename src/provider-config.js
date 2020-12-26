@@ -40,7 +40,7 @@ export const providerConfig = {
       vm.$src = query
       return vm
     },
-
+    // https://help.aliyun.com/document_detail/183902.html?spm=a2c4g.11186623.2.12.738828fbVGaPAf#section-tx1-qtj-ar8
     [srcProcess.CROP_IMAGE](vm) {
       const {$src = '', width, height, autocrop, src} = vm
 
