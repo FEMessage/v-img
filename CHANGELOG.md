@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/FEMessage/v-img/compare/v1.7.1...v1.8.0) (2020-12-26)
+
+
+### Features
+
+* simple user agent detection in sync way ([#35](https://github.com/FEMessage/v-img/issues/35)) ([e8aa309](https://github.com/FEMessage/v-img/commit/e8aa309))
+
+
+
 ### [1.7.1](https://github.com/FEMessage/v-img/compare/v1.7.0...v1.7.1) (2020-11-27)
 
 
