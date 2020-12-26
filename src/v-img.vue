@@ -19,6 +19,7 @@
 
 <script>
 import {providerConfig, default as getSrc} from './provider-config'
+import ua from './ua'
 
 /**
  * TODO:
@@ -184,6 +185,10 @@ export default {
       }
     },
     async checkSupportWebp() {
+      // to avoid async check in some scenario, for example: lighthouse
+      this.isSupportWebp = ua.isSupportWebp(navigator.userAgent)
+      if (this.isSupportWebp) return
+
       this.isSupportWebp = JSON.parse(localStorage.getItem('isSupportWebp'))
       if (this.isSupportWebp !== null) return
 
