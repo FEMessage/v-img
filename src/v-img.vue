@@ -177,7 +177,7 @@ export default {
     checkLayout() {
       if (!this.width && !this.height) {
         console.warn(
-          'You better set image width or height attribute, otherwise v-img lazyload may not work correctly'
+          'You better set image width or height attribute, otherwise v-img lazyload may not work properly'
         )
       }
     },
