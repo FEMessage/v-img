@@ -5,7 +5,7 @@
 <template>
   <div>
     <p> 原图 宽：400 高：267 </p>
-    <v-img :src="src"/>
+    <v-img :src="src" width="200"/>
     <p> 按宽度等比缩放 宽：100 高：等比缩放<p/>
     <v-img :src="src" width="100"/>
     <p> 按高度等比缩放 高：100 宽：等比缩放<p/>

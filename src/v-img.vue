@@ -48,13 +48,11 @@ export default {
     },
     /** 图片宽度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     width: {
-      type: [String, Number],
-      default: 'auto'
+      type: [String, Number]
     },
     /** 图片高度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     height: {
-      type: [String, Number],
-      default: 'auto'
+      type: [String, Number]
     },
     /** 是否需要 loading 效果 */
     hasLoading: {
