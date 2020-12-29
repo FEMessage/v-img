@@ -2,7 +2,7 @@ import getImageSrc from './provider-config'
 import ua from './ua'
 
 function getSrc(config) {
-  // TODO 暂时只用简单的同步方式检测
+  // TODO only simply check in sync way
   const isSupportWebp =
     ua.isSupportWebp(navigator.userAgent) ||
     JSON.parse(localStorage.getItem('isSupportWebp')) ||
