@@ -1,6 +1,6 @@
 // Import vue component
 import Component from './v-img.vue'
-import background from './background'
+import background from './directive'
 import placeholder from './spinner.svg'
 import loadScript from './loadScript.js'
 
