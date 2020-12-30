@@ -2,7 +2,7 @@
 import Component from './v-img.vue'
 import background from './directive'
 import placeholder from './spinner.svg'
-import loadScript from './load-script.js'
+import loadScript from './load-script'
 
 const defaultOptions = {
   placeholder,
