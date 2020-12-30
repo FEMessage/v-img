@@ -18,7 +18,7 @@ export default function({name, url}) {
         script.remove()
         reject(err)
       }
-      node.parentNode.insertBefore(script, node)
+      node.parentNode.insertBefore(script, null)
     }
   })
 }
