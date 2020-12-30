@@ -1,19 +1,17 @@
-const loaded = new Set()
-
-export default function(url) {
+export default function({name, url}) {
   return new Promise((resolve, reject) => {
     if (!url) {
-      reject(new Error('Script is not found'))
+      reject(new Error('to load script, url cannot be null'))
     }
-    if (loaded.has(url)) {
+    if (document.getElementById(name)) {
       resolve(true)
     } else {
       const node = document.getElementsByTagName('script')[0],
         script = document.createElement('script')
-      script.src = url
+      script.setAttribute('id', name)
+      script.setAttribute('src', url)
 
       script.onload = function() {
-        loaded.add(url)
         resolve(true)
       }
       script.onerror = function(err) {

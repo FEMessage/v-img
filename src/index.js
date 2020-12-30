@@ -22,7 +22,10 @@ Component.install = (Vue, options = {}) => {
   Vue.prototype.$vImg = {...defaultOptions, ...options}
 
   if (typeof window !== 'undefined' && !window.lazySizes) {
-    Promise.all([loadScript(bgset), loadScript(lazysizes)]).catch(console.error)
+    Promise.all([
+      loadScript({name: 'bgset', url: bgset}),
+      loadScript({name: 'lazysizes', url: lazysizes})
+    ]).catch(console.error)
   }
 
   Vue.component(Component.name, Component)
