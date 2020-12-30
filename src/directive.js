@@ -1,8 +1,12 @@
 import getImageSrc from './provider-config'
+import ua from './ua'
 
 function getSrc(config) {
+  // TODO only simply check in sync way
   const isSupportWebp =
-    JSON.parse(localStorage.getItem('isSupportWebp')) || false
+    ua.isSupportWebp(navigator.userAgent) ||
+    JSON.parse(localStorage.getItem('isSupportWebp')) ||
+    false
   const {
     provider = 'alibaba',
     extraQuery,

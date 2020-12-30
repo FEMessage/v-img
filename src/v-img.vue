@@ -183,9 +183,8 @@ export default {
       }
     },
     async checkSupportWebp() {
-      // to avoid async check in some scenario, for example: lighthouse
-      this.isSupportWebp = ua.isSupportWebp(navigator.userAgent)
-      if (this.isSupportWebp) return
+      // use sync check first
+      if (ua.isSupportWebp(navigator.userAgent)) return
 
       this.isSupportWebp = JSON.parse(localStorage.getItem('isSupportWebp'))
       if (this.isSupportWebp !== null) return
