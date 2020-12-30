@@ -2,7 +2,7 @@
 import Component from './v-img.vue'
 import background from './directive'
 import placeholder from './spinner.svg'
-import loadScript from './loadScript.js'
+import loadScript from './load-script.js'
 
 const defaultOptions = {
   placeholder,
@@ -22,7 +22,7 @@ Component.install = (Vue, options = {}) => {
   Vue.prototype.$vImg = {...defaultOptions, ...options}
 
   if (typeof window !== 'undefined' && !window.lazySizes) {
-    Promise.all([loadScript(lazysizes), loadScript(bgset)]).catch(console.error)
+    Promise.all([loadScript(bgset), loadScript(lazysizes)]).catch(console.error)
   }
 
   Vue.component(Component.name, Component)
