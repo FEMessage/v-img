@@ -22,6 +22,7 @@ Component.install = (Vue, options = {}) => {
   Vue.prototype.$vImg = {...defaultOptions, ...options}
 
   if (typeof window !== 'undefined' && !window.lazySizes) {
+    // https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset
     Promise.all([
       loadScript({name: 'bgset', url: bgset}),
       loadScript({name: 'lazysizes', url: lazysizes})
