@@ -184,7 +184,8 @@ export default {
     },
     async checkSupportWebp() {
       // use sync check first
-      if (ua.isSupportWebp(navigator.userAgent)) return
+      this.isSupportWeb = ua.isSupportWebp(navigator.userAgent)
+      if (this.isSupportWebp) return
 
       this.isSupportWebp = JSON.parse(localStorage.getItem('isSupportWebp'))
       if (this.isSupportWebp !== null) return
