@@ -1,9 +1,10 @@
 <template>
   <img
-    class="v-img lazyload"
+    class="v-img"
     :class="classname"
     :style="style"
     :height="height"
+    ref="vImg"
     :width="width"
     :data-src="imageSrc.$src"
     :data-uncropped-src="imageSrc.$uncroppedSrc"
@@ -34,7 +35,7 @@ import ua from './ua'
 
 const STATUS_IDLE = 0
 // 目前没有必要区分 idle 和 loading，暂且保留标识符
-// const STATUS_LOADING = 1
+const STATUS_LOADING = 1
 const STATUS_LOADED = 2
 const STATUS_ERROR = 3
 
@@ -114,11 +115,13 @@ export default {
     classname() {
       switch (this.status) {
         case STATUS_IDLE:
-          return `on-loading`
+          return 'lazyload'
+        case STATUS_LOADING:
+          return 'lazyloading'
         case STATUS_ERROR:
-          return `on-error`
+          return 'lazyload-error'
         default:
-          return ``
+          return ''
       }
     },
 
@@ -130,7 +133,7 @@ export default {
         backgroundColor: '#f0f2f5'
       }
       switch (this.status) {
-        case STATUS_IDLE:
+        case STATUS_LOADING:
           if (!this.hasLoading) return {}
           return {
             ...baseStyle,
@@ -174,6 +177,14 @@ export default {
     this.checkSupportWebp()
   },
 
+  mounted() {
+    document.addEventListener('lazybeforeunveil', this.onLoading)
+  },
+
+  beforeDestroy() {
+    document.removeEventListener('lazybeforeunveil', this.onLoading)
+  },
+
   methods: {
     checkLayout() {
       if (!this.width && !this.height) {
@@ -202,6 +213,12 @@ export default {
     },
     forceUpdateSrc() {
       this.$el.setAttribute('src', this.imageSrc.$src)
+    },
+    onLoading(e) {
+      if (this.$refs.vImg == e.target) {
+        this.status = STATUS_LOADING
+        document.removeEventListener('lazybeforeunveil', this.onLoading)
+      }
     },
     onLoad() {
       if (this.$el.getAttribute('src') === this.imageSrc.$src)
