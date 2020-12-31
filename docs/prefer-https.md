@@ -14,25 +14,25 @@ if `preferHttps` enable and the provider is not (none | self):<br>
 
   <!-- warning -->
     <v-img
-     width="100"
-     height="100"
-     src="http://via.digital.com/100"
+     width="101"
+     height="101"
+     src="http://via.digital.com/101"
      />
 
   <!-- nothing happen -->
     <v-img
-     width="100"
-     height="100"
+     width="102"
+     height="102"
      provider="none"
-     src="http://via.digital.com/100"
+     src="http://via.digital.com/102"
      />
 
   <!-- nothing happen -->
     <v-img
-     width="100"
-     height="100"
+     width="103"
+     height="103"
      :preferHttps="false"
-     src="http://via.digital.com/100"
+     src="http://via.digital.com/103"
      />
 
   </div>
