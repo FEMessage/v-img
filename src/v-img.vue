@@ -101,7 +101,7 @@ export default {
       default: true,
     },
     /**
-     * if enable and provider not none/self: //img-url => https://img-url
+     * //img-url => https://img-url
      */
     preferHttps: {
       type: Boolean,
