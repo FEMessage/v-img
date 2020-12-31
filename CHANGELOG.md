@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/FEMessage/v-img/compare/v1.8.0...v1.9.0) (2020-12-31)
+
+
+### Bug Fixes
+
+* background-img webp format ([ed8cbc4](https://github.com/FEMessage/v-img/commit/ed8cbc4))
+* background-img webp format ([#37](https://github.com/FEMessage/v-img/issues/37)) ([b6db843](https://github.com/FEMessage/v-img/commit/b6db843))
+* isSupportWebp should have value ([fddf4f9](https://github.com/FEMessage/v-img/commit/fddf4f9))
+
+
+### Features
+
+* preferHttps ([#39](https://github.com/FEMessage/v-img/issues/39)) ([95a532a](https://github.com/FEMessage/v-img/commit/95a532a))
+
+
+
 ## [1.8.0](https://github.com/FEMessage/v-img/compare/v1.7.1...v1.8.0) (2020-12-26)
 
 
