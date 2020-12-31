@@ -1,8 +1,8 @@
 // Import vue component
 import Component from './v-img.vue'
-import background from './background'
+import background from './directive'
 import placeholder from './spinner.svg'
-import loadScript from './loadScript.js'
+import loadScript from './load-script'
 
 const defaultOptions = {
   placeholder,
@@ -22,7 +22,11 @@ Component.install = (Vue, options = {}) => {
   Vue.prototype.$vImg = {...defaultOptions, ...options}
 
   if (typeof window !== 'undefined' && !window.lazySizes) {
-    Promise.all([loadScript(lazysizes), loadScript(bgset)]).catch(console.error)
+    // https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/bgset
+    Promise.all([
+      loadScript({name: 'bgset', url: bgset}),
+      loadScript({name: 'lazysizes', url: lazysizes})
+    ]).catch(console.error)
   }
 
   Vue.component(Component.name, Component)

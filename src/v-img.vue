@@ -45,27 +45,27 @@ export default {
     /** 图片地址 */
     src: {
       type: String,
-      default: ''
+      default: '',
     },
     /** 图片宽度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     width: {
-      type: [String, Number]
+      type: [String, Number],
     },
     /** 图片高度, 值为数字, 该属性会与懒加载有关(宽度、高度设置一个即可) */
     height: {
-      type: [String, Number]
+      type: [String, Number],
     },
     /** 是否需要 loading 效果 */
     hasLoading: {
       type: Boolean,
-      default: true
+      default: true,
     },
     /** 服务提供商 */
     provider: {
       default: 'alibaba',
       validator(v) {
         return Object.keys(providerConfig).indexOf(v) > -1
-      }
+      },
     },
     /**
      * 当provider=alibaba时，v-img默认开启oss图片处理服务
@@ -74,7 +74,7 @@ export default {
      */
     extraQuery: {
       type: String,
-      default: ''
+      default: '',
     },
 
     /**
@@ -82,7 +82,7 @@ export default {
      */
     placeholder: {
       type: String,
-      default: ''
+      default: '',
     },
 
     /**
@@ -90,7 +90,7 @@ export default {
      */
     error: {
       type: String,
-      default: ''
+      default: '',
     },
 
     /**
@@ -98,8 +98,15 @@ export default {
      */
     autocrop: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
+    /**
+     * //img-url => https://img-url
+     */
+    preferHttps: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data() {
@@ -107,7 +114,7 @@ export default {
       isSupportWebp: null,
       status: STATUS_IDLE,
       transparentImg:
-        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+        'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=',
     }
   },
   computed: {
@@ -127,14 +134,14 @@ export default {
         backgroundSize: 'auto 22px',
         backgroundPosition: 'center center',
         backgroundRepeat: 'no-repeat',
-        backgroundColor: '#f0f2f5'
+        backgroundColor: '#f0f2f5',
       }
       switch (this.status) {
         case STATUS_IDLE:
           if (!this.hasLoading) return {}
           return {
             ...baseStyle,
-            backgroundImage: `url(${this.loadingImage})`
+            backgroundImage: `url(${this.loadingImage})`,
           }
         case STATUS_ERROR:
           if (!this.hasLoading) return {}
@@ -142,7 +149,7 @@ export default {
             ...baseStyle,
             backgroundImage: `url(${this.reloadImage})`,
             backgroundSize: 'auto 40px',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }
         default:
           return {}
@@ -156,7 +163,7 @@ export default {
     },
     reloadImage() {
       return this.error || this.$vImg.error
-    }
+    },
   },
 
   watch: {
@@ -166,7 +173,7 @@ export default {
        * 更新之后，lazySizes就不会检查data-src属性的变更；此时要手动更新
        */
       if (!this.$el.classList.contains('lazyload')) this.forceUpdateSrc()
-    }
+    },
   },
 
   beforeMount() {
@@ -183,8 +190,8 @@ export default {
       }
     },
     async checkSupportWebp() {
-      // to avoid async check in some scenario, for example: lighthouse
-      this.isSupportWebp = ua.isSupportWebp(navigator.userAgent)
+      // use sync check first
+      this.isSupportWeb = ua.isSupportWebp(navigator.userAgent)
       if (this.isSupportWebp) return
 
       this.isSupportWebp = JSON.parse(localStorage.getItem('isSupportWebp'))
@@ -213,7 +220,7 @@ export default {
     },
     onClick() {
       if (this.status === STATUS_ERROR) this.forceUpdateSrc()
-    }
-  }
+    },
+  },
 }
 </script>
