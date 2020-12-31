@@ -4,13 +4,61 @@ const getSrc = val => _getSrc(val).$src
 const getUncroppedSrc = val => _getSrc(val).$uncroppedSrc
 
 describe('alibaba', () => {
+  const defaultQuery = '?x-oss-process=image/quality,Q_75'
   const src = 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
+  const relative = '//image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
+  const https = 'https://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
+
+  test('preferHttps', () => {
+    const defaultConfig = {
+      provider: 'alibaba',
+      preferHttps: true,
+    }
+
+    expect(
+      getSrc({
+        src: relative,
+        ...defaultConfig,
+      })
+    ).toBe(https + defaultQuery)
+
+    expect(
+      getSrc({
+        src: relative,
+        ...defaultConfig,
+        preferHttps: false,
+      })
+    ).toBe(relative + defaultQuery)
+
+    expect(
+      getSrc({
+        src: relative,
+        ...defaultConfig,
+        provider: 'none',
+      })
+    ).toBe(relative)
+
+    expect(
+      getSrc({
+        src,
+        ...defaultConfig,
+      })
+    ).toBe(src + defaultQuery)
+
+    expect(
+      getSrc({
+        src: https,
+        ...defaultConfig,
+      })
+    ).toBe(https + defaultQuery)
+  })
+
   test('浏览器支持webp', () => {
     expect(
       getSrc({
         provider: 'alibaba',
         src,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
@@ -19,9 +67,9 @@ describe('alibaba', () => {
       getSrc({
         provider: 'alibaba',
         src,
-        isSupportWebp: false
+        isSupportWebp: false,
       })
-    ).toBe(`${src}?x-oss-process=image/quality,Q_75`)
+    ).toBe(`${src}${defaultQuery}`)
   })
   test('浏览器支持webp，但图片不是(png|jpe?g)', () => {
     const webp = src.replace('png', 'webp')
@@ -29,9 +77,9 @@ describe('alibaba', () => {
       getSrc({
         provider: 'alibaba',
         src: webp,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
-    ).toBe(`${webp}?x-oss-process=image/quality,Q_75`)
+    ).toBe(`${webp}${defaultQuery}`)
   })
   test('svg不处理，除非有extraQuery', () => {
     const svg = src.replace('png', 'svg')
@@ -41,7 +89,7 @@ describe('alibaba', () => {
       getSrc({
         provider: 'alibaba',
         src: svg,
-        extraQuery
+        extraQuery,
       })
     ).toBe(`${svg}?x-oss-process=image/${extraQuery}`)
   })
@@ -52,7 +100,7 @@ describe('alibaba', () => {
         provider: 'alibaba',
         src,
         isSupportWebp: true,
-        extraQuery
+        extraQuery,
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75/${extraQuery}`)
   })
@@ -64,7 +112,7 @@ describe('alibaba', () => {
         src,
         isSupportWebp: true,
         autocrop: true,
-        width: 100
+        width: 100,
       })
     ).toBe(`${src}?x-oss-process=image/resize,w_200/format,webp/quality,Q_75`)
   })
@@ -75,7 +123,7 @@ describe('alibaba', () => {
         src,
         isSupportWebp: true,
         autocrop: true,
-        height: 100
+        height: 100,
       })
     ).toBe(`${src}?x-oss-process=image/resize,h_200/format,webp/quality,Q_75`)
   })
@@ -87,7 +135,7 @@ describe('alibaba', () => {
         isSupportWebp: true,
         autocrop: true,
         height: 100,
-        width: 100
+        width: 100,
       })
     ).toBe(
       `${src}?x-oss-process=image/resize,m_fill,h_200,w_200/format,webp/quality,Q_75`
@@ -99,7 +147,7 @@ describe('alibaba', () => {
         provider: 'alibaba',
         src,
         isSupportWebp: true,
-        autocrop: true
+        autocrop: true,
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
@@ -112,7 +160,7 @@ describe('alibaba', () => {
         isSupportWebp: true,
         autocrop: true,
         height: 100,
-        width: 100
+        width: 100,
       })
     ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
   })
@@ -121,14 +169,14 @@ describe('alibaba', () => {
     expect(
       getSrc({
         provider: 'alibaba',
-        src: ''
+        src: '',
       })
     ).toBe('')
 
     expect(
       getSrc({
         provider: 'alibaba',
-        src: null
+        src: null,
       })
     ).toBe('')
   })
@@ -141,7 +189,7 @@ describe('qiniu', () => {
       getSrc({
         provider: 'qiniu',
         src,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${src}?imageMogr2/format/webp/quality/75`)
   })
@@ -150,7 +198,7 @@ describe('qiniu', () => {
       getSrc({
         provider: 'qiniu',
         src,
-        isSupportWebp: false
+        isSupportWebp: false,
       })
     ).toBe(`${src}?imageMogr2/quality/75`)
   })
@@ -160,7 +208,7 @@ describe('qiniu', () => {
       getSrc({
         provider: 'qiniu',
         src: webp,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${webp}?imageMogr2/quality/75`)
   })
@@ -175,7 +223,7 @@ describe('qiniu', () => {
         provider: 'qiniu',
         src,
         isSupportWebp: true,
-        extraQuery
+        extraQuery,
       })
     ).toBe(`${src}?imageMogr2/format/webp/quality/75/${extraQuery}`)
   })
@@ -188,7 +236,7 @@ describe('self', () => {
       getSrc({
         provider: 'self',
         src,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${src}.webp`)
   })
@@ -200,7 +248,7 @@ describe('self', () => {
       getSrc({
         provider: 'self',
         src: src + query,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${src}.webp${query}`)
   })
@@ -211,7 +259,7 @@ describe('self', () => {
       getSrc({
         provider: 'self',
         src,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${src}.webp`)
   })
@@ -222,7 +270,7 @@ describe('self', () => {
       getSrc({
         provider: 'self',
         src,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(`${src}.webp`)
   })
@@ -233,7 +281,7 @@ describe('self', () => {
       getSrc({
         provider: 'self',
         src,
-        isSupportWebp: true
+        isSupportWebp: true,
       })
     ).toBe(src)
   })

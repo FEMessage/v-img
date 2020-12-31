@@ -9,7 +9,7 @@ function is(types, src) {
 const srcProcess = {
   CONVERT_WEBP: 'convertWebp',
   CROP_IMAGE: 'cropImage',
-  APPEND_QUERY: 'appendQuery'
+  APPEND_QUERY: 'appendQuery',
 }
 
 const pipe = function(fns) {
@@ -21,6 +21,23 @@ const pipe = function(fns) {
       return fn(prev)
     }, item)
   }
+}
+
+/**
+ * //img-url => https://img-url
+ * origin 参数纯粹是为了警告
+ * @param url
+ */
+function preferHttps(url, origin) {
+  if (url.startsWith('//')) {
+    return 'https:' + url
+  } else if (!url.startsWith('https')) {
+    console.warn(
+      'preferHttps is true, but this img is using http protocol: ' +
+        (origin || url)
+    )
+  }
+  return url
 }
 
 export const providerConfig = {
@@ -95,7 +112,7 @@ export const providerConfig = {
 
       vm.$src = query || src
       return vm
-    }
+    },
   },
   qiniu: {
     [srcProcess.CONVERT_WEBP](vm) {
@@ -126,7 +143,7 @@ export const providerConfig = {
 
       vm.$src = query || src
       return vm
-    }
+    },
   },
   self: {
     [srcProcess.CONVERT_WEBP](vm) {
@@ -140,14 +157,14 @@ export const providerConfig = {
         vm.$src = src
       }
       return vm
-    }
+    },
   },
   none: {
     [srcProcess.CONVERT_WEBP](vm) {
       vm.$src = vm.src || ''
       return vm
-    }
-  }
+    },
+  },
 }
 
 /**
@@ -162,8 +179,13 @@ export default vm => {
   const output = pipe([
     providerPipe[srcProcess.CONVERT_WEBP],
     providerPipe[srcProcess.CROP_IMAGE],
-    providerPipe[srcProcess.APPEND_QUERY]
+    providerPipe[srcProcess.APPEND_QUERY],
   ])(vm)
   vm.$uncroppedSrc = vm.$src.replace(vm.$resizeQuery, '')
+
+  if (vm.preferHttps && ['self', 'none'].indexOf(vm.provider) == -1) {
+    vm.$src = preferHttps(vm.$src, vm.src)
+  }
+
   return output
 }
