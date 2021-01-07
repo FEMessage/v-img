@@ -13,7 +13,8 @@ function getSrc(config) {
     src,
     width,
     height,
-    autocrop = true
+    autocrop = true,
+    preferHttps = true,
   } = config
   if (!src) {
     return
@@ -26,7 +27,8 @@ function getSrc(config) {
     isSupportWebp,
     extraQuery,
     width,
-    height
+    height,
+    preferHttps,
   }).$src
 }
 
@@ -34,7 +36,7 @@ export default {
   init(el, {value = {}}) {
     const size = {
       width: el.offsetWidth,
-      height: el.offsetHeight
+      height: el.offsetHeight,
     }
     const src = getSrc({...size, ...value})
     el.classList.add('lazyload')
@@ -44,5 +46,5 @@ export default {
   update(el, {value = {}}) {
     const src = getSrc(value)
     el.style.backgroundImage = `url(${src})`
-  }
+  },
 }

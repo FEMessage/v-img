@@ -40,7 +40,8 @@ const STATUS_ERROR = 3
 
 export default {
   name: 'VImg',
-
+  // TODO: 这里新增一个属性，如果想指令也可以使用，需要在 directive.js 里读取，暂时不能只修改一个处，就同时在两个文件生效
+  // 因为这个的限制 https://github.com/vue-styleguidist/vue-styleguidist/issues/923
   props: {
     /** 图片地址 */
     src: {
