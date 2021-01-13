@@ -20,6 +20,7 @@
 <script>
 import {providerConfig, default as getSrc} from './provider-config'
 import ua from './ua'
+import computeLayout from './compute-layout'
 
 /**
  * TODO:
@@ -137,6 +138,8 @@ export default {
         backgroundRepeat: 'no-repeat',
         backgroundColor: '#f0f2f5',
       }
+      let layout = {}
+
       switch (this.status) {
         case STATUS_IDLE:
           if (!this.hasLoading) return {}
@@ -152,8 +155,11 @@ export default {
             backgroundSize: 'auto 40px',
             cursor: 'pointer',
           }
+        // loaded
         default:
-          return {}
+          layout = computeLayout(this)
+          Object.keys(layout).forEach(k => (layout[k] = layout[k] + 'px'))
+          return layout
       }
     },
     imageSrc() {
