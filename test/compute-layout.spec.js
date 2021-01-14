@@ -104,8 +104,8 @@ describe('compute img layout', () => {
   })
 
   test('设置了不恰当比例的宽高，要防止变形', () => {
-    vm.$el.style.width = '80px'
-    vm.$el.style.height = '100px'
+    vm.$el.style.width = '100px'
+    vm.$el.style.height = '80px'
     expect(computeLayout(vm)).toStrictEqual({width: 80, height: 80})
 
     vm.width = 100
