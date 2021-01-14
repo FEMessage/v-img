@@ -20,6 +20,7 @@
 <script>
 import {providerConfig, default as getSrc} from './provider-config'
 import ua from './ua'
+import computeLayout from './compute-layout'
 
 /**
  * TODO:
@@ -40,7 +41,8 @@ const STATUS_ERROR = 3
 
 export default {
   name: 'VImg',
-
+  // TODO: 这里新增一个属性，如果想指令也可以使用，需要在 directive.js 里读取，暂时不能只修改一个处，就同时在两个文件生效
+  // 因为这个的限制 https://github.com/vue-styleguidist/vue-styleguidist/issues/923
   props: {
     /** 图片地址 */
     src: {
@@ -136,6 +138,8 @@ export default {
         backgroundRepeat: 'no-repeat',
         backgroundColor: '#f0f2f5',
       }
+      let layout = {}
+
       switch (this.status) {
         case STATUS_IDLE:
           if (!this.hasLoading) return {}
@@ -151,8 +155,11 @@ export default {
             backgroundSize: 'auto 40px',
             cursor: 'pointer',
           }
+        // loaded
         default:
-          return {}
+          layout = computeLayout(this)
+          Object.keys(layout).forEach(k => (layout[k] = layout[k] + 'px'))
+          return layout
       }
     },
     imageSrc() {
