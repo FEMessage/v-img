@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/FEMessage/v-img/compare/v1.9.0...v1.10.0) (2021-01-14)
+
+
+### Features
+
+* compute layout ([#42](https://github.com/FEMessage/v-img/issues/42)) ([405e22c](https://github.com/FEMessage/v-img/commit/405e22c))
+
+
+
 ## [1.9.0](https://github.com/FEMessage/v-img/compare/v1.8.0...v1.9.0) (2020-12-31)
 
 
