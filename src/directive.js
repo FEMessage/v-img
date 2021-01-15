@@ -2,11 +2,6 @@ import getImageSrc from './provider-config'
 import ua from './ua'
 
 function getSrc(config) {
-  // TODO only simply check in sync way
-  const isSupportWebp =
-    ua.isSupportWebp(navigator.userAgent) ||
-    JSON.parse(localStorage.getItem('isSupportWebp')) ||
-    false
   const {
     provider = 'alibaba',
     extraQuery,
@@ -15,9 +10,17 @@ function getSrc(config) {
     height,
     autocrop = true,
     preferHttps = true,
+    webp = true,
   } = config
-  if (!src) {
-    return
+  if (!src) return
+
+  let isSupportWebp = false
+  if (webp) {
+    // TODO only simply check in sync way
+    isSupportWebp =
+      ua.isSupportWebp(navigator.userAgent) ||
+      JSON.parse(localStorage.getItem('isSupportWebp')) ||
+      false
   }
 
   return getImageSrc({

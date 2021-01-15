@@ -109,6 +109,13 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     * 是否使用webp
+     */
+    webp: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data() {
@@ -184,8 +191,8 @@ export default {
   },
 
   beforeMount() {
-    this.checkLayout()
-    this.checkSupportWebp()
+    // this.checkLayout()
+    this.webp && this.checkSupportWebp()
   },
 
   methods: {
