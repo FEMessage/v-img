@@ -1,10 +1,10 @@
-import _getSrc from '../src/provider-config'
+import _getSrc, {quality} from '../src/provider-config'
 
 const getSrc = val => _getSrc(val).$src
 const getUncroppedSrc = val => _getSrc(val).$uncroppedSrc
 
 describe('alibaba', () => {
-  const defaultQuery = '?x-oss-process=image/quality,Q_75'
+  const defaultQuery = `?x-oss-process=image/quality,Q_${quality}`
   const src = 'http://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
   const relative = '//image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
   const https = 'https://image-demo.oss-cn-hangzhou.aliyuncs.com/panda.png'
@@ -60,7 +60,7 @@ describe('alibaba', () => {
         src,
         isSupportWebp: true,
       })
-    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
+    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_${quality}`)
   })
   test('浏览器不支持webp', () => {
     expect(
@@ -102,7 +102,9 @@ describe('alibaba', () => {
         isSupportWebp: true,
         extraQuery,
       })
-    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75/${extraQuery}`)
+    ).toBe(
+      `${src}?x-oss-process=image/format,webp/quality,Q_${quality}/${extraQuery}`
+    )
   })
 
   test('自动裁剪，只传 width', () => {
@@ -114,7 +116,9 @@ describe('alibaba', () => {
         autocrop: true,
         width: 100,
       })
-    ).toBe(`${src}?x-oss-process=image/resize,w_200/format,webp/quality,Q_75`)
+    ).toBe(
+      `${src}?x-oss-process=image/resize,w_200/format,webp/quality,Q_${quality}`
+    )
   })
   test('自动裁剪，只传 height', () => {
     expect(
@@ -125,7 +129,9 @@ describe('alibaba', () => {
         autocrop: true,
         height: 100,
       })
-    ).toBe(`${src}?x-oss-process=image/resize,h_200/format,webp/quality,Q_75`)
+    ).toBe(
+      `${src}?x-oss-process=image/resize,h_200/format,webp/quality,Q_${quality}`
+    )
   })
   test('自动裁剪，height 和 width 都传', () => {
     expect(
@@ -138,7 +144,7 @@ describe('alibaba', () => {
         width: 100,
       })
     ).toBe(
-      `${src}?x-oss-process=image/resize,m_fill,h_200,w_200/format,webp/quality,Q_75`
+      `${src}?x-oss-process=image/resize,m_fill,h_200,w_200/format,webp/quality,Q_${quality}`
     )
   })
   test('自动裁剪，height 和 width 都不传', () => {
@@ -149,7 +155,7 @@ describe('alibaba', () => {
         isSupportWebp: true,
         autocrop: true,
       })
-    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
+    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_${quality}`)
   })
 
   test('获取不经过裁剪的 url', () => {
@@ -162,7 +168,7 @@ describe('alibaba', () => {
         height: 100,
         width: 100,
       })
-    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_75`)
+    ).toBe(`${src}?x-oss-process=image/format,webp/quality,Q_${quality}`)
   })
 
   test('测试 src 为空', () => {
@@ -191,7 +197,7 @@ describe('qiniu', () => {
         src,
         isSupportWebp: true,
       })
-    ).toBe(`${src}?imageMogr2/format/webp/quality/75`)
+    ).toBe(`${src}?imageMogr2/format/webp/quality/${quality}`)
   })
   test('浏览器不支持webp', () => {
     expect(
@@ -200,7 +206,7 @@ describe('qiniu', () => {
         src,
         isSupportWebp: false,
       })
-    ).toBe(`${src}?imageMogr2/quality/75`)
+    ).toBe(`${src}?imageMogr2/quality/${quality}`)
   })
   test('浏览器支持webp，但图片不是(png|jpe?g)', () => {
     const webp = src.replace('jpg', 'webp')
@@ -210,7 +216,7 @@ describe('qiniu', () => {
         src: webp,
         isSupportWebp: true,
       })
-    ).toBe(`${webp}?imageMogr2/quality/75`)
+    ).toBe(`${webp}?imageMogr2/quality/${quality}`)
   })
   test('svg不处理', () => {
     const svg = src.replace('jpg', 'svg')
@@ -225,7 +231,7 @@ describe('qiniu', () => {
         isSupportWebp: true,
         extraQuery,
       })
-    ).toBe(`${src}?imageMogr2/format/webp/quality/75/${extraQuery}`)
+    ).toBe(`${src}?imageMogr2/format/webp/quality/${quality}/${extraQuery}`)
   })
 })
 

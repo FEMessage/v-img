@@ -6,7 +6,7 @@ const svg = /\.svg(\?.*)?$/
  * https://helpx.adobe.com/hk_en/experience-manager/6-3/assets/using/best-practices-for-optimizing-the-quality-of-your-images.html
  * https://sirv.com/help/articles/jpeg-quality-comparison/#use-sirv-to-find-the-perfect-quality
  */
-const quality = 80
+export const quality = 80
 
 function is(types, src) {
   return Array.isArray(types) ? types.some(t => t.test(src)) : types.test(src)
