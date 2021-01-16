@@ -2,6 +2,12 @@ const png = /\.png(\?.*)?$/
 const jpg = /\.jpe?g(\?.*)?$/
 const webp = /\.webp(\?.*)?$/
 const svg = /\.svg(\?.*)?$/
+/**
+ * https://helpx.adobe.com/hk_en/experience-manager/6-3/assets/using/best-practices-for-optimizing-the-quality-of-your-images.html
+ * https://sirv.com/help/articles/jpeg-quality-comparison/#use-sirv-to-find-the-perfect-quality
+ */
+export const quality = 80
+
 function is(types, src) {
   return Array.isArray(types) ? types.some(t => t.test(src)) : types.test(src)
 }
@@ -52,7 +58,7 @@ export const providerConfig = {
        * 质量变换仅对jpg、webp有效。（png已被转为webp）
        * @see https://help.aliyun.com/document_detail/44705.html?spm=a2c4g.11186623.6.1256.347d69cb9tB4ZR
        */
-      if (is([png, jpg, webp], src)) query += '/quality,Q_75'
+      if (is([png, jpg, webp], src)) query += `/quality,Q_${quality}`
 
       vm.$src = query
       return vm
@@ -125,7 +131,7 @@ export const providerConfig = {
         return vm
       }
       if (isSupportWebp && is([png, jpg], src)) query += '/format/webp'
-      query += '/quality/75'
+      query += `/quality/${quality}`
 
       vm.$src = query
       return vm

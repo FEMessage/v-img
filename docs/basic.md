@@ -15,6 +15,8 @@ these features are out of box:
     <div v-for="_ in 2" class="padding" :style="{height}">height: {{height}}</div>
     <button @click="i = +!i">点击切换src</button>
     <v-img :src="srcs[i]" width="100"/>
+    <p>可以选择关闭webp转换</p>
+    <v-img :src="srcs[0]" width="100" :webp="false"/>
   </div>
 </template>
 
@@ -35,9 +37,9 @@ export default {
 
 <style>
 .padding {
-  background-color: green; 
-  color: white; 
-  font-size: 50px; 
+  background-color: green;
+  color: white;
+  font-size: 50px;
   border: 1px solid yellow;
 }
 </style>
