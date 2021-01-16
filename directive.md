@@ -9,7 +9,10 @@ use `v-img` directive, can let background-image to use webp。
 
 ```vue
 <template>
-  <div v-img="{src}" style="width:100px;height:100px;background-repeat:no-repeat;" />
+  <div>
+    <div v-img="{src}" style="width:100px;height:100px;background-repeat:no-repeat;" />
+    <div v-img="{src, webp: false}" style="width:100px;height:100px;background-repeat:no-repeat;" />
+  </div>
 </template>
 
 <script>
