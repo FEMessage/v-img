@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.10.1](https://github.com/FEMessage/v-img/compare/v1.10.0...v1.10.1) (2021-01-16)
+
+
+### Bug Fixes
+
+* set quality 80 and can turn off webp transformation ([#43](https://github.com/FEMessage/v-img/issues/43)) ([aa6a684](https://github.com/FEMessage/v-img/commit/aa6a684))
+
+
+
 ## [1.10.0](https://github.com/FEMessage/v-img/compare/v1.9.0...v1.10.0) (2021-01-14)
 
 
