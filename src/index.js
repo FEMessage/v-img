@@ -10,9 +10,9 @@ const defaultOptions = {
   error: reload,
 }
 
-const lazysizes = 'https://cdn.jsdelivr.net/npm/lazysizes/lazysizes.min.js'
+const lazysizes = 'https://unpkg.com/lazysizes/lazysizes.min.js'
 const bgset =
-  'https://cdn.jsdelivr.net/npm/lazysizes/plugins/bgset/ls.bgset.min.js'
+  'https://unpkg.com/lazysizes/plugins/bgset/ls.bgset.min.js'
 
 // `Vue.use` automatically prevents you from using
 // the same plugin more than once,
